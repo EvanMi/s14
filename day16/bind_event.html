@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="test" onmousedown="test(this)">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+</body>
+<script>
+    var mydiv = document.getElementById('test');
+    mydiv.onclick = function (ev) {
+        console.info(ev)
+        console.info('helo world')
+    }
+/*同时绑定多个事件，dom2
+    mydiv.addEventListener('click',function () {
+        console.info('xxx');
+    },false);//false是冒泡模型（最里面的先触发，最外面的后出发），true是捕捉模型（正好相反）
+    mydiv.addEventListener('click',function () {
+        console.info('xxx1');
+    },false);
+*/
+    var mytrs = document.getElementsByTagName('tr');
+    for(var i=0;i<mytrs.length;i++){
+        mytrs[i].onmouseover = function (ev) {
+            this.style.background = 'red';//这里的this就是指mytrs[i],谁调用指向谁
+            //用mytrs[i].style.backgroud='red'不行，函数作用域的问题
+            //因为function在执行的时候i已经等于于了mytrs.length
+        }
+    }
+    function test(ths) {
+        console.info(ths);
+    }
+
+
+</script>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="jquery.min.js"></script>
+<script>
+    //jQuery扩展
+    $.extend({
+        'mi':function(){
+           return 'good';
+        }
+    });
+
+    var x =$.mi();
+    alert(x);
+
+    //第二种扩展方式
+    $.fn.extend({
+        'evan':function () {
+            console.info(this);
+            return 'great'
+        }
+    });
+
+    $(window).evan();
+</script>
+</body>
+</html>

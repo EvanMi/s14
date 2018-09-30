@@ -1,0 +1,79 @@
+django为用户实现防止跨站请求伪造的功能，通过中间件 django.middleware.csrf.CsrfViewMiddleware 来完成。而对于django中设置防跨站请求伪造功能有分为全局和局部。
+
+全局：
+
+　　中间件 django.middleware.csrf.CsrfViewMiddleware
+
+局部：
+
+@csrf_protect，为当前函数强制设置防跨站请求伪造功能，即便settings中没有设置全局中间件。
+@csrf_exempt，取消当前函数防跨站请求伪造功能，即便settings中设置了全局中间件。
+注：from django.views.decorators.csrf import csrf_exempt,csrf_protect
+
+二、应用
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/log" method="post">
+    {{ csrf_token }}
+    {% csrf_token %}
+    <input type="text" name="user">
+    <input type="password" name="pwd">
+    <input type="submit" value="提交">
+    <input type="button" value="test" onclick="test()">
+</form>
+</body>
+<script src="/static/jquery.min.js"></script>
+<script src="/static/jquery.cookie.js"></script>
+<script>
+function test() {
+    //统一配置该页面的ajax
+    $.ajaxSetup({
+        beforeSend:function (xhr, settings) {//xmlhttpRequest
+            xhr.setRequestHeader('X-CSRFToken',$.cookie('csrftoken'));
+        }
+    });
+
+    //官网标准配置
+        var csrftoken = $.cookie('csrftoken');
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+
+
+   // var csrftoken = $.cookie('csrftoken');
+    $.ajax({
+        url:'/log',
+        type:'POST',
+        data:{'user':'root', 'pwd':'123'},
+       // headers:{'X-CSRFtoken':csrftoken},
+        success:function (data) {
+            console.info(data)
+        }
+    });
+}
+</script>
+</html>

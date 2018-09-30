@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="https://www.baidu.com" method="get">
+    <input name="tset" type="text">
+    <input type="submit" value="提交">
+</form>
+<script src="jquery.min.js"></script>
+<script>
+    $(':submit').click(function () {
+        var x = $(this).prev().val();
+        if(x.length>0) return true;
+        return false;
+    });
+</script>
+</body>
+</html>

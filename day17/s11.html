@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="t1" type="text"> <input id="a1" type="button" value="添加">
+<input id="a2" type="button" value="删除">
+<input id="a3" type="button" value="复制">
+<ul id="u1">
+    <li>1</li>
+    <li>2</li>
+</ul>
+<script src="jquery.min.js"></script>
+<script>
+    $('#a1').click(function () {
+        var v = $('#t1').val();
+        var dli = document.createElement('li');
+        $(dli).text(v+new Date().getTime());
+        $('#u1').append(dli);//在标签内往后添加
+        //$('#u1').prepend(dli);在标签内往前添加
+        //$('#u1').after(dli); //在标签外的后面
+        //$('#u1').before(dli);在标签外的前面
+    });
+    $('#a2').click(function () {
+         var v = $('#t1').val();
+        // $('ul li').eq(v).remove(); 删除标签
+        //$('ul li').eq(v).empty(); 清空内容
+    });
+    $('#a3').click(function () {
+          var v = $('#t1').val();
+          var vv = $('ul li').eq(v).clone();
+          $('#u1').append(vv);
+    })
+</script>
+</body>
+</html>

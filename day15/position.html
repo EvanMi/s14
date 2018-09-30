@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>position</title>
+    <style>
+        .page-header{
+            height: 49px;
+            background-color: black;
+            line-height: 49px;
+            color: #dddddd;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left:0;
+            width: 100%;
+
+        }
+    </style>
+</head>
+<body>
+<div class="page-header">我来组成头部</div>
+<div onclick="goTop();" style="width: 50px;height: 50px;background-color: black;color: white;position: fixed;bottom:2px;right: 20px;z-index: 99999">
+    返回顶部</div>
+<div style="height: 5000px; background-color: #dddddd;margin-top: 50px">aa</div>
+<!--absolute和relative结合起来使用很有用-->
+<!--默认放在整个页面的某个位置-->
+<div style="width: 50px;height: 50px;background-color: black;color: white;position: absolute;top:60px;right: 20px;">
+绝对的定位</div>
+<!--如果父级的标签的position为relative，那么absolute的所有位置就是相对与父标签的了-->
+<div style="height: 200px; background-color: #dddddd;margin-top: 50px;position:relative;">
+  <div style="width: 50px;height: 50px;background-color: black;color: white;position: absolute;top:60px;right: 20px;">
+      相对的绝对的定位</div>
+</div>
+<script>
+    function goTop() {
+        console.info('llllllllllllllllll');
+        document.documentElement.scrollTop = 0;
+    }
+</script>
+</body>
+</html>
+
+<!--if (document.body && document.body.scrollTop && document.body.scrollLeft)-->
+<!--{-->
+<!--　　top=document.body.scrollTop;-->
+<!--　　left=document.body.scrollleft;    -->
+<!--}-->
+<!--if (document.documentElement && document.documentElement.scrollTop && document.documentElement.scrollLeft)-->
+<!--{-->
+<!--　　top=document.documentElement.scrollTop;-->
+<!--　　left=document.documentElement.scrollLeft;-->
+<!--}-->

@@ -1,0 +1,13 @@
+JSONP 一种请求方式，解决浏览器的同源问题的策略，也就是域名必须相同
+
+
+    $.ajax({
+        url:'http://www.jxntv.cn/data/jmd-jxtv2.html?_=1454376870403',
+        dataType:'jsonp',
+        jsonp:'callback',
+        jsonpCallback:'list'
+    });
+
+    function list(data) {
+        console.info(data);
+    }

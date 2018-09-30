@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>modal</title>
+    <style>
+        .c1{
+            position: fixed;
+            left:0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background-color: black;
+            opacity: 0.6;
+            z-index: 9;
+        }
+        .c2{
+            width: 500px;
+            height: 400px;
+            background-color: white;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            margin-top: -200px;
+            margin-left: -250px;
+            z-index: 10;
+        }
+        .hide{
+            display: none;
+        }
+    </style>
+</head>
+<body style="margin: 0">
+
+<div>
+    <input type="button" value="显示" onclick="show()">
+</div>
+
+<!--遮罩层-->
+<div class="c1 hide" id="i1"></div>
+<!--弹出框-->
+<div class="c2 hide" id="i2">
+<div><input type="button" value="隐藏" onclick="hide()"></div>
+<div>
+    <h4>联系人信息</h4>
+    <div>联系人:<input type="text" placeholder="(必填)">联系电话:<input type="text" placeholder="(必填)"></div>
+    <hr>
+    <h4>客户地址明细</h4>
+</div>
+</div>
+<script>
+    //js必须加分号，因为现实的压缩后的js只有一行
+    function show() {
+        document.getElementById('i1').classList.remove('hide');
+        document.getElementById('i2').classList.remove('hide');
+    }
+    function hide(){
+        document.getElementById('i1').classList.add('hide');
+        document.getElementById('i2').classList.add('hide');
+    }
+</script>
+</body>
+</html>

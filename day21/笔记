@@ -1,0 +1,8 @@
+url补充：通过字典传默认值
+path('index/', views.index, {'name': 'default'})   详细的内容看 第19周的笔记
+
+
+
+cookie:
+    客户端浏览器上的一个文件
+    {'k':'asdf'}

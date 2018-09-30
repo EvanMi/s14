@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ProvideAndRegisterDocumentSetRequest xmlns="urn:ihe:iti:xds-b:2007" xmlns:rs="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" xmlns:lcm="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0" xmlns:rim="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:ihe:iti:xds-b:2007 ../../schema/IHE/XDS.b_DocumentRepository.xsd">
+  <lcm:SubmitObjectsRequest xsi:schemaLocation="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0 ../../schema/ebRS/lcm.xsd">
+    <rim:RegistryObjectList>
+      <rim:RegistryPackage id="urn:uuid:8cf541b7-451a-4c0a-9f5c-f5bd49542621" lid="urn:uuid:8cf541b7-451a-4c0a-9f5c-f5bd49542621" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">
+        <rim:Name>
+          <rim:LocalizedString value="ihe"/>
+        </rim:Name>
+        <rim:Description>
+          <rim:LocalizedString value="ihe文件夹"/>
+        </rim:Description>
+        <rim:Classification classificationScheme="urn:uuid:1ba97051-7806-41a8-a48b-8fce7af683c5" classifiedObject="urn:uuid:8cf541b7-451a-4c0a-9f5c-f5bd49542621" id="urn:uuid:6105fa55-8167-460f-867f-c5fd85ed7e40" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" nodeRepresentation="DEMO-Consult">
+          <rim:Slot name="codingScheme">
+            <rim:ValueList>
+              <rim:Value>1.3.6.1.4.1.21367.100.1</rim:Value>
+            </rim:ValueList>
+          </rim:Slot>
+          <rim:Name>
+            <rim:LocalizedString value="DEMO-Consult#1.3.6.1.4.1.21367.100.1"/>
+          </rim:Name>
+        </rim:Classification>
+        <rim:ExternalIdentifier identificationScheme="urn:uuid:f64ffdf0-4b97-4e06-b79f-a52b38ec2f8a" value="Ewell^^^&amp;1.3.6.1.4.1.21367.2005.13.20.1000&amp;ISO" id="urn:uuid:264dbefb-fe57-4248-80c3-43089acc13e8" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:8cf541b7-451a-4c0a-9f5c-f5bd49542621">
+          <rim:Name>
+            <rim:LocalizedString value="XDSFolder.patientId"/>
+          </rim:Name>
+        </rim:ExternalIdentifier>
+        <rim:ExternalIdentifier identificationScheme="urn:uuid:75df8f67-9973-4fbe-a900-df66cefecc5a" value="1.2.3.4.5.6.51415" id="urn:uuid:22cb1440-c09e-457b-9fc3-dcbfffd210eb" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:8cf541b7-451a-4c0a-9f5c-f5bd49542621">
+          <rim:Name>
+            <rim:LocalizedString value="XDSFolder.uniqueId"/>
+          </rim:Name>
+        </rim:ExternalIdentifier>
+      </rim:RegistryPackage>
+      <rim:Classification classificationNode="urn:uuid:d9d542f3-6cc4-48b6-8870-ea235fbc94c2" classifiedObject="urn:uuid:8cf541b7-451a-4c0a-9f5c-f5bd49542621" id="urn:uuid:5551b12f-135f-4149-aa5c-4165d0422126" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification"/>
+      <rim:RegistryPackage id="393251c5-1280-4cf5-97a5-e23288c1b529" lid="393251c5-1280-4cf5-97a5-e23288c1b529" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">
+        <rim:Slot name="submissionTime">
+          <rim:ValueList>
+            <rim:Value>20041225235050</rim:Value>
+          </rim:ValueList>
+        </rim:Slot>
+        <rim:Name>
+          <rim:LocalizedString value="Physical"/>
+        </rim:Name>
+        <rim:Description>
+          <rim:LocalizedString value="Annual physical"/>
+        </rim:Description>
+        <rim:Classification classificationScheme="urn:uuid:a7058bb9-b4e4-4307-ba5b-e3f0ab85e12d" classifiedObject="393251c5-1280-4cf5-97a5-e23288c1b529" id="urn:uuid:c9352e0d-babb-4452-8383-a7e2e8380693" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" nodeRepresentation="">
+          <rim:Slot name="authorPerson">
+            <rim:ValueList>
+              <rim:Value>^Dopplemeyer^Sherry^^^</rim:Value>
+            </rim:ValueList>
+          </rim:Slot>
+          <rim:Slot name="authorInstitution">
+            <rim:ValueList>
+              <rim:Value>Cleveland Clinic</rim:Value>
+            </rim:ValueList>
+          </rim:Slot>
+          <rim:Slot name="authorRole">
+            <rim:ValueList>
+              <rim:Value>Primary Surgon</rim:Value>
+            </rim:ValueList>
+          </rim:Slot>
+          <rim:Slot name="authorSpecialty">
+            <rim:ValueList>
+              <rim:Value>Orthopedic</rim:Value>
+            </rim:ValueList>
+          </rim:Slot>
+        </rim:Classification>
+        <rim:Classification classificationScheme="urn:uuid:aa543740-bdda-424e-8c96-df4873be8500" classifiedObject="393251c5-1280-4cf5-97a5-e23288c1b529" id="urn:uuid:b570b3b9-830d-4ba1-87af-0a952d547e3f" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" nodeRepresentation="28568-4">
+          <rim:Slot name="codingScheme">
+            <rim:ValueList>
+              <rim:Value>2.16.840.1.113883.6.1</rim:Value>
+            </rim:ValueList>
+          </rim:Slot>
+          <rim:Name>
+            <rim:LocalizedString value="ED Visit Note"/>
+          </rim:Name>
+        </rim:Classification>
+        <rim:ExternalIdentifier identificationScheme="urn:uuid:96fdda7c-d067-4183-912e-bf5ee74998a8" value="1.2.3.4.5.6.85254" id="urn:uuid:2c2d34ec-a592-4321-88a5-a7b90d86c5dd" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="393251c5-1280-4cf5-97a5-e23288c1b529">
+          <rim:Name>
+            <rim:LocalizedString value="XDSSubmissionSet.uniqueId"/>
+          </rim:Name>
+        </rim:ExternalIdentifier>
+        <rim:ExternalIdentifier identificationScheme="urn:uuid:554ac39e-e3fe-47fe-b233-965d2a147832" value="1.3.6.1.4.1.21367.2009.1.2" id="urn:uuid:037c4d41-c5cf-4950-ac25-cc3587e6697d" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="393251c5-1280-4cf5-97a5-e23288c1b529">
+          <rim:Name>
+            <rim:LocalizedString value="XDSSubmissionSet.sourceId"/>
+          </rim:Name>
+        </rim:ExternalIdentifier>
+        <rim:ExternalIdentifier identificationScheme="urn:uuid:6b5aea1a-874d-4603-a4bc-96a0a7b38446" value="Ewell^^^&amp;1.3.6.1.4.1.21367.2005.13.20.1000&amp;ISO" id="urn:uuid:01434fdc-350a-41c6-93ab-7f145f4eb1d5" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="393251c5-1280-4cf5-97a5-e23288c1b529">
+          <rim:Name>
+            <rim:LocalizedString value="XDSSubmissionSet.patientId"/>
+          </rim:Name>
+        </rim:ExternalIdentifier>
+      </rim:RegistryPackage>
+      <rim:Classification classificationNode="urn:uuid:a54d6aa5-d40d-43f9-88c5-b4633d873bdd" classifiedObject="393251c5-1280-4cf5-97a5-e23288c1b529" id="urn:uuid:1b6ca737-65e7-45d9-afd7-03300a197ac6" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification"/>
+      <rim:Association id="urn:uuid:e62e1169-c933-4401-9aff-4efdf47f3188" lid="urn:uuid:e62e1169-c933-4401-9aff-4efdf47f3188" associationType="urn:oasis:names:tc:ebxml-regrep:AssociationType:HasMember" sourceObject="393251c5-1280-4cf5-97a5-e23288c1b529" targetObject="8cf541b7-451a-4c0a-9f5c-f5bd49542621" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Association"/>
+    </rim:RegistryObjectList>
+  </lcm:SubmitObjectsRequest>
+</ProvideAndRegisterDocumentSetRequest>

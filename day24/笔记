@@ -1,0 +1,9 @@
+
+form验证
+    正则表达式
+    clean_字段()
+    clean()     --> __all__
+    _post_clean()
+
+
+models一大波操作记住select_relative    prefetch_relative

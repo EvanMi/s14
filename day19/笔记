@@ -1,0 +1,131 @@
+一、路由系统，URL
+	1、path('index/', views.index),
+	   path('home/', views.Home.as_view()),
+	2、re_path(r'^detail-(\d+).html', views.detail),
+	3、re_path(r'^detail-(?P<nid>\d+)-(?P<uid>\d+).html', views.detail)
+
+	   PS:
+			def detail(request, *args,**kwargs):
+				pass
+
+	   实战：
+			a.
+				url(r'^detail-(\d+)-(\d+).html', views.detail),
+
+				def func(request, nid, uid):
+
+					pass
+
+				def func(request, *args):
+					args = (2,9)
+
+
+				def func(request, *args, **kwargs):
+					args = (2,9)
+
+			b.
+				url(r'^detail-(?P<nid>\d+)-(?P<uid>\d+).html', views.detail)
+
+				def func(request, nid, uid):
+					pass
+
+				def funct(request, **kwargs):
+					kwargs = {'nid': 1, 'uid': 3}
+
+				def func(request, *args, **kwargs):
+					args = (2,9)
+		4、 name
+
+		对URL路由关系进行命名， ***** 以后可以根据此名称生成自己想要的URL *****
+
+		url(r'^asdfasdfasdf/', views.index, name='i1'),
+		url(r'^yug/(\d+)/(\d+)/', views.index, name='i2'),
+		url(r'^buy/(?P<pid>\d+)/(?P<nid>\d+)/', views.index, name='i3'),
+
+
+
+		def func(request, *args, **kwargs):
+			from django.urls import reverse
+
+			url1 = reverse('i1')                              # asdfasdfasdf/
+			url2 = reverse('i2', args=(1,2,))                 # yug/1/2/
+			url3 = reverse('i3', kwargs={'pid': 1, "nid": 9}) # buy/1/9/
+
+
+		xxx.html
+
+			{% url "i1" %}               # asdfasdfasdf/
+			{% url "i2" 1 2 %}           # yug/1/2/
+			{% url "i3" pid=1 nid=9 %}   # buy/1/9/
+
+		注：
+			# 当前的URL
+			request.path_info
+	    5、多级路由
+
+		project/urls.py
+			from django.conf.urls import url,include
+			from django.contrib import admin
+
+			urlpatterns = [
+				url(r'^cmdb/', include("app01.urls")),
+				url(r'^monitor/', include("app02.urls")),
+			]
+
+		app01/urls.py
+			from django.conf.urls import url,include
+			from django.contrib import admin
+			from app01 import views
+
+			urlpatterns = [
+				url(r'^login/', views.login),
+			]
+
+		app02/urls.py
+			from django.conf.urls import url,include
+			from django.contrib import admin
+			from app02 import views
+
+			urlpatterns = [
+				url(r'^login/', views.login),
+			]
+
+	    6、默认值（欠）
+
+	    7、命名空间（欠）
+二、视图
+    request.GET
+    request.POST
+    request.FILES
+
+    #checkbox selector 等多选的内容
+    request.POST.getlist('xxx')
+
+    #上传文件
+    obj = request.FILES.get('fff')
+    obj.name #文件的名称
+    for item in obj.chunks():
+        一块一块的写入
+
+    #FBV （function based view）& CBV(class based view)
+    urs.py
+        index -->.函数名 FBV
+        index --> 类.as_view() CBV
+
+三、模板
+四、ORM操作
+创建类
+    1.根据类自动创建数据库表
+      app/models.py
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dbname',
+        'USER': 'root',
+        'PASSWORD': 'xxx',
+        'HOST': 'xxx',
+        'PORT': 'xxx'),
+    }
+}
+    2.根据类对数据库中的数据进行各种操作

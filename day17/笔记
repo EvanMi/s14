@@ -1,0 +1,140 @@
+http://jquery.cuishifeng.cn/
+一、查找元素
+选择器，直接找到某个或某类标签
+1.id
+    $('#id')
+2.class
+    $('.cls')
+3.标签
+    $('a') 找到所有的a标签
+4.组合
+    $('a,.c2,#id') 找到所有的a标签，类为c2的标签和ID为id的标签
+5.层级选择器
+    遍历到子子孙孙
+        $('#id a div')
+    只找自己的儿子满足条件的
+        $('#id'>a)
+    下一个
+        $('#id'+div)
+    兄弟
+        $('#id'~div)
+6.基本筛选器
+    $('#id a div:first')
+    :first
+    :last
+    :eq(index)
+    :lt(index)
+    :gt(index)
+    :hidden
+    ;header
+    :visible
+  属性
+    [attribute] $('[xxx]') 所有具有xxx属性的标签
+    [attribute=value] $('[xxx="123"]') 根据属性的值获取
+    [attribute!=value] 不等于
+    [attribute^=value] 以。。。开头
+    [attribute$=value] 以。。。结尾
+    [attribute*=value] 包含。。。的
+    [attrSel1][attrSel2][attrSelN] 具有多个属性的标签
+
+方法：
+    //专用于checkbox和radio的checked
+    $(this).prop('checked',v);//设置对应的属性值
+    $(this).prop('checked');//获取对应属性值
+
+    $(this).removeAttr('xxxx'); //删除属性
+    $(this).attr('xxxx'); //获取自定义属性的值
+    $(this).attr('xxxx','xx');//设置自定义属性的值
+    jquery的内置循环和自带循环（有K下标、和this当前循环的对象）
+    三元运算//以上内容见s2.html
+
+    $('#SS').addClass(); //给标签添加类
+    $("#SS").removeClass(); //移除标签的类属性
+    $('#ss').toogleClass('hh')//有移除没有加上 见s8.html
+    $('#ss').hasClass('jj')//判断是否有该class 见s8.html
+    jquery绑定点击事件；
+    jquery已经知道了jquery对象以后使用的筛选方法
+    jquery链式编程//以上内容见s3.html
+    过滤
+    eq(index|-index)
+    first()
+    last()
+    hasClass(class)
+    filter(expr|obj|ele|fn)
+    is(expr|obj|ele|fn)
+    map(callback)
+    has(expr|ele)
+    not(expr|ele|fn)
+    slice(start,[end])
+    查找
+    children([expr])
+    closest(e|o|e)1.7*
+    find(e|o|e)
+    next([expr])
+    nextAll([expr])
+    nextUntil([e|e][,f])
+    offsetParent()
+    parent([expr])
+    parents([expr])
+    parentsUntil([e|e][,f])
+    prev([expr])
+    prevAll([expr])
+    prevUntil([e|e][,f])
+    siblings([ex    pr])
+    $('ss').text()//获取text内容
+    $('ss').html()//获取html
+    $('ss').text("111")//设置text内容
+    $('ss').html("<div>hello</div>")//设置html
+    针对与input系列
+    $('ss').val()//获取值
+    $('ss').val('123')//设置值
+
+    $('ss').index()获取对象的位置、序号 见tab.html
+
+    克隆clone、删除remove、清空内容empty 见s11.html
+    append内部追加、prepend内部头不插入、after外部追加、before外部头部插入  见s11.html
+
+
+css处理
+    $('sdd').css('样式名称','样式值'); 示例见zan.html
+
+位置：
+    $(window).srollTop(val)让当前窗口滚动到
+    $(window).srollTop() 获取当前窗口的滚动值
+    $('div').srollTop(val)让某个div的滚动到
+    $('div').srollTop() 获取div的滚动值
+    $(xxx).srcllLeft() //前面是上下滚动，这个是左右滚动
+
+    offset 指定标签在html中的坐标
+    $('xxx').offset(); -->object{top:8, left:199}; $('xxx').offset().left  $('xxx').offset().top
+
+    position()获取标签相对于父标签的位置（父标签就是它的第一个外层relative）
+
+    height()获取标签的纯高度
+    innerHeight() 获取第一个匹配元素内部区域高度（包括补白(padding)、不包括边框）。
+    outterHeight() 获取第一个匹配元素外部高度（默认包括补白和边框）
+    outterHeight(true) 设置为 true 时，计算边距在内(margin)
+    width()获取标签的宽度
+    innerWidth()
+    outterWidth()
+    outterWidth(true)
+
+
+事件：
+    DOM:三种绑定方式
+    jQuery:
+           绑定方式一： $('.....').click(function(){  });
+           绑定方式二： $('......').bind('click',function(){});
+                        $('......').unbind('click',function(){});
+                        /*delegate可以为新加的a标签也绑定上事件*/
+                        $('.......').delegate('a','click',function(){});
+                        $('.......').undelegate('a','click',function(){});
+                        $('.......').on('click',function(){});
+                        $('.......').off('click',function(){});
+
+
+
+当页面框架加载完成之后自动执行
+$(fucntion(){
+
+});

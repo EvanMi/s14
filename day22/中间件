@@ -1,0 +1,80 @@
+process_request
+process_response
+
+# -*- coding:utf-8 -*-
+# Author: Evan Mi
+from django.utils.deprecation import MiddlewareMixin
+from django.shortcuts import HttpResponse
+->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->request
+<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-reponse
+class Row1(MiddlewareMixin):
+
+    def process_request(self, request):
+        print('我的中间件request')
+        # 要中断就返回
+        return HttpResponse('bye')
+
+    def process_response(self, request, response):
+        print('我的中间件response')
+        return response
+
+
+# -*- coding:utf-8 -*-
+# Author: Evan Mi
+from django.utils.deprecation import MiddlewareMixin
+from django.shortcuts import HttpResponse
+
+->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->request
+->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->view
+<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-reponse
+class Row1(MiddlewareMixin):
+
+    def process_request(self, request):
+        print('我的中间件request')
+        # 要中断就返回
+        # return HttpResponse('bye')
+
+    def process_view(self, request, view_func, view_func_args, view_func_kwargs):
+        print('我的中间件view')
+
+    def process_response(self, request, response):
+        print('我的中间件response')
+        return response
+
+
+
+
+
+
+# -*- coding:utf-8 -*-
+# Author: Evan Mi
+from django.utils.deprecation import MiddlewareMixin
+from django.shortcuts import HttpResponse
+
+#参数没有response，如果return None那么继续下一环；return response中断
+ # 参数有response的必须要返回response
+class Row1(MiddlewareMixin):
+
+    def process_request(self, request):
+        print('我的中间件request')
+        # 要中断就返回
+        # return HttpResponse('bye')
+
+    def process_view(self, request, view_func, view_func_args, view_func_kwargs):
+        print('我的中间件view')
+       // return HttpResponse('hhaa')
+
+    def process_response(self, request, response):
+        print('我的中间件response')
+        return response
+
+    # view函数报错的时候执行
+    def process_exception(self, request, exception):
+        print(exception)
+        return HttpResponse('出错了')
+
+
+    # 如果view中的函数中为render()时执行, 其实是执行TemplateResponse的时候执行，已经废弃了
+    def process_template_response(self, request, response):
+        print('模版')
+        return response

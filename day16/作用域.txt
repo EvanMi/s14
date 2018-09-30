@@ -1,0 +1,177 @@
+其他语言：以代码块作为作用域
+public void func(String v){//大括号之间是代码块
+    if(1==1){
+        string name = 'Java';
+    }
+    system.out.println(name);//会报错
+}
+在python中是以函数为作用域的
+def test():
+    if 1 == 1:
+        name = 'alex'
+    print(name)
+
+test()
+---------------------------1 在javascrip中以函数为作用域,除了let关键字以外----------
+function fun(){
+if(i==1){
+var name = 'alex';
+}
+console.info(name)
+}
+fun()
+----------------------------------------------
+----------------2 函数的作用域，在函数未被调用之前就已经被创建了---------------------
+----------------3 函数的作用域存在作用域链，并且也是在创建之前被创建------------------------------
+xo ='alex';
+function func(){
+    var xo = 'eric';
+    function inner(){
+    var xo = 'tony';
+    console.log(xo)
+    }
+    inner();
+}
+func()//从里往外掏
+
+///////////////////////////////////////做个修改
+xo='alex';
+function func(){
+    var xo = 'eric';
+    function inner(){
+    console.info(xo);
+    }
+    return inner;
+}
+
+var ret =func();
+ret();//你嘛，竟然输出的eric；因为作用域链在函数创建的时候就确定了
+//////////////////////////////////////再变
+xo='alex';
+function func(){
+    var xo = 'eric';
+    function inner(){
+    console.info(xo);
+    }
+    var xo = 'tony';
+    return inner;
+}
+
+var ret =func();
+ret();//输出的tony
+-----------------4 javascript特有：函数内局部变量 提前声明----------------------------------
+function func(){
+    console.info(xxoo);;
+}
+func();//直接报错
+
+function func(){
+    console.info(xxoo);
+    var xxoo = 'alex';
+}
+//对函数解释的时候，先把所有的内部变量执行一下var xx;
+//这里就是先执行了var xxoo;
+func();//undefined
+
+
+
+javascript 支持的面向对象
+function Foo(n){
+this.name = n;
+this.sayName=function(){//不合理，每个对象都要保存一个这个方法
+console.info(this.name);
+}
+}
+var obj = new Foo('we');
+obj.name
+obj.sayName();
+两点和函数的区别：一、this代指对象，相当于python中的self；二、创建对象时，new函数（）；
+原型：
+function Foo(n){
+    this.name = n;
+}
+Foo.prototype = {
+    sayName : function(){
+        console.log(this.name)
+    },
+    sayName1 : function(){
+        console.log(this.name)
+    }
+}
+
+
+/**********************************************************************************************************************/
+DOM
+      查找
+          直接查找
+              var obj = document.getElementById('i1');
+          间接查找
+
+      操作
+          标签内容操作：获取 var xx=obj.innerText:仅文本；var xx =obj.innerHTML:全部内容
+                        设值 obj.innerText='xxxxx'; obj.innerHTML='<a>aa</a>'
+                        value 针对与input系列生效，textarea系列生效
+                        select.value获取的是选中option的值，也可设置，来选中option
+                        select有selectedindex属性，可以获取当前的选中的option的序号，也可以设值，来选中option
+          样式进行操作：
+                       className
+                       classList
+                                  classList.add
+                                  classList.remove
+                        obj.style.xxx=''
+                        例如
+                        obj.style.color = 'red'
+                        obj.style.fontSize = '13px'//斜杠去掉转驼峰
+           属性操作：
+                        obj.setAttribute('key','val') //给标签设置属性
+                        obj.removeAttribute('key') //把标签的属性移除
+                        obj.attributes//获取标签所有的属性
+           创建标签：
+                         a.字符串形式
+                         b.对象的方式
+                         见add_html.html
+            提交表单：
+                         通过<input type='submit'>提交
+                         通过document.getElementById('form').submit()提交
+             提示框：
+                         alert('123')
+                         var x =confirm('x');//接受用户是确认了操作还是取消了操作
+              刷新：
+                         location.href   获取url
+                         location.href = 'url' 设置url
+                         location.reload() //刷新
+              定时器：
+                         var x = setInterval(function(){},200); //设置定时器
+                         clearInterval(x);//删除定时器
+                         var y = setTimeout(function(){},200); //在200毫秒后执行
+                         clearTimeout(y);//删除
+
+事件：
+              见bind_event.html
+
+
+
+
+词法分析：
+            function ti(age){
+                console.log(age); //function age()
+                var age = 27;
+                console.log(age); //27
+               // function age(){}
+               // console.log(age); //27
+            }
+
+            ti(3);
+
+
+            active object ===== AO
+            分析：1.形式参数
+                  2.局部变量
+                  3.函数声明表达式
+             1.形式参数
+             AO.age= undefined
+             AO.age= 3
+             2.局部变量
+             如果形式参数不是age那么AO.age=undefined；这里不做任何改变
+             3.函数声明表达式
+             AO.age=function()

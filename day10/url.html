@@ -1,0 +1,1240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+<meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="referrer" content="always">
+<link href="//csdnimg.cn//public/favicon.ico" rel="shortcut icon" />
+<link href="//blog.csdn.net/u012613903/article/details/79498942"  rel="canonical" />
+<link href="//blog.csdn.net/u012613903/rss/list" id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" />
+<script src="//csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="https://dup.baidustatic.com/js/ds.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var CFG={
+        BASE_URL : "https://csdnimg.cn/release/phoenix/",    //当前页面对应的虚拟路径,静态资源对应目录同<base href="">
+        API_URL  : "//blog.csdn.net/",                 //当前项目默认的后端API地址
+        ROOT_URL  : "//blog.csdn.net/",          //当前项目根路径, JS跳转
+        STATIC_URL : "https://csdnimg.cn/release/phoenix/",          //本项目静态资源根目录
+        STATIC_GLOBAL_URL : "//csdnimg.cn/",    //公共静态资源根目录
+        CUR_URL : "//blog.csdn.net/u012613903/article/details/79498942",
+        SO_URL : "http://so.csdn.net/so/search/s.do"  // 站内搜索路径
+    }
+</script>
+    <title>python3 正则表达式模块re相关 - CSDN博客</title>
+    <meta name="keywords" content="python3,re" />
+    <meta name="description" content="# -*- coding:utf-8 -*-
+# Author: Evan Mi
+import re
+&amp;quot;&amp;quot;&amp;quot;
+'.'     默认匹配除\n之外的任意一个字符，若指定flag DOTALL,则匹配任意字符，包括换行
+'^'     匹配字符开头，若指定flags MULTILINE,这种也可以匹配上(r&amp;quot;^a&amp;quot;,&amp;quot;\nabc\neee&amp;quot;,flags=re.MULTILINE)
+'$'     匹配..." />
+    <meta name="referrer" content="always">
+    <link href="//csdnimg.cn/blog/csdn_public_blog_detail.min.css" type="text/css" rel="stylesheet"/>
+    <link href="https://csdnimg.cn/release/phoenix/dotnet/css/blog_detail-fef21e31bb.css" type="text/css" rel="stylesheet" />
+    <link href="https://csdnimg.cn/release/phoenix/bloglist/iconfont/iconfont.css" type="text/css" rel="stylesheet"/>
+    <link href="https://csdnimg.cn/release/phoenix/dotnet/skin/skin-yellow/css/style.css?v=201803151147"  type="text/css" rel="stylesheet" />
+    <script>
+        var username = "u012613903";
+        var _blogger = username;
+        var blog_address = "//blog.csdn.net/u012613903";
+        var static_host = "https://csdnimg.cn/release/phoenix/";
+        var currentUserName = "";
+        var islock = false;
+        var fileName = "79498942";
+        var commentscount = 0;
+        var curUserFace = "//avatar.csdn.net/D/4/1/3_.jpg";
+
+        document.domain = "csdn.net";
+        var title="python3 正则表达式模块re相关";
+        window.quickReplyflag = true;
+        var isBole = false;
+        var fasrc="https://my.csdn.net//my/favoriteminiadd?dt=python3 正则表达式模块re相关&u=http://blog.csdn.net/u012613903/article/details/79498942";
+        var baiduKey = "python3+%E6%AD%A3%E5%88%99%E6%A8%A1%E5%9D%97%E6%97%A0%E6%B3%95%E5%AF%BC%E5%85%A5";
+        var needInsertBaidu = true;
+    </script>
+      <script src="//csdnimg.cn/search/baidu_search-1.1.2.js?v=201802071056&autorun=true&install=true&keyword=java"  type="text/javascript"></script>
+      <script src="https://csdnimg.cn/release/phoenix/dotnet/js/blog_detail-10fc9dd7e6.js" type="text/javascript"></script>
+    <style type="text/css">
+        .embody{
+            padding:10px 10px 10px;
+            margin:0 -20px;
+            border-bottom:solid 1px #ededed;
+        }
+        .embody_b{
+            margin:0 ;
+            padding:10px 0;
+        }
+        .embody .embody_t,.embody .embody_c{
+            display: inline-block;
+            margin-right:10px;
+        }
+        .embody_t{
+            font-size: 12px;
+            color:#999;
+        }
+        .embody_c{
+            font-size: 12px;
+        }
+        .embody_c img,.embody_c em{
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .embody_c img{
+            width:30px;
+            height:30px;
+        }
+        .embody_c em{
+            margin: 0 20px 0 10px;
+            color:#333;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body>
+<link rel="stylesheet" href="//csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+<script id="toolbar-tpl-scriptId" src="//csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="//blog.csdn.net/"></script>
+<div id="container">
+    <!--header+navigator-->
+    <div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h2>
+                <a href="//blog.csdn.net/u012613903">萝卜地里的兔子的博客</a>
+            </h2>
+            <h3>
+                追求卓越，那么成功自然来到身边             </h3>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg">
+    </div>
+    <div class="navigator">
+        <ul>
+            <li id="btnContents"><a href="//blog.csdn.net/u012613903?viewmode=contents"><span
+                    onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_mulu'])">
+                    <img src="https://csdnimg.cn/release/phoenix/images/ico_list.gif">目录视图</span></a></li>
+            <li id="btnView"><a href="//blog.csdn.net/u012613903?viewmode=list"><span
+                    onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_zhaiyao'])">
+                    <img src="https://csdnimg.cn/release/phoenix/images/ico_summary.gif">摘要视图</span></a></li>
+            <li id="btnRss"><a href="//blog.csdn.net/u012613903/rss/list"><span
+                    onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_RSS'])">
+                    <img src="https://csdnimg.cn/release/phoenix/images/ico_rss.gif">订阅</span></a></li>
+                    </ul>
+    </div>
+</div>
+    <div id="body">
+        <div id="main">
+            <div class="main">
+               <div class="main">
+    <div class="ad_class">
+    </div>
+    <!--文章详情-->
+    <div id="article_details" class="details">
+        <div class="article_title">
+            <span class="ico ico_type_Original"></span>
+            <h1>
+                <span class="link_title">
+                    <a href="http://blog.csdn.net/u012613903/article/details/79498942">
+                        
+                                                python3 正则表达式模块re相关                    </a>
+                </span>
+            </h1>
+        </div>
+        <div class="article_manage clearfix">
+        <div class="article_l">
+        <span class="link_categories">
+        标签：
+                            <a href="http://so.csdn.net/so/search/s.do?q=python3&t=blog" target="_blank">python3</a>
+                    <a href="http://so.csdn.net/so/search/s.do?q=re&t=blog" target="_blank">re</a>
+                        </span>
+    </div>
+        <div class="article_r">
+        <span class="link_postdate">2018年03月09日 16:10:58</span>
+        <span class="link_view" title="阅读次数">24人阅读</span>
+        <span class="link_comments" title="评论次数"> <a href="javascript:void(0);" class="btn-pinglun">评论</a>(0)</span>
+        <span class="link_collect csdn-tracking-statistics" data-pid="blog"  data-mod="popu_171">
+            <a href="javascript:void(0);" onclick="javascript:collectArticle('python3 正则表达式模块re相关','79498942');return false;" title="收藏">收藏</a>
+        </span>
+                <span class="link_report">
+            <a href="javascript:void(0);" onclick="javascript:report(79498942, 2);return false;" title="举报">举报</a>
+        </span>
+                    </div>
+</div>
+<script  type="text/javascript">
+    $(function () {
+        try
+        {
+            var lib = eval("("+$("#lib").attr("value")+")");
+            var html = "";
+            if (lib.err == 0) {
+                $.each(lib.data, function (i) {
+                    var obj = lib.data[i];
+                    //html += '<img src="' + obj.logo + '"/>' + obj.name + "&nbsp;&nbsp;";
+                    html += ' <a href="' + obj.url + '" target="_blank">';
+                    html += ' <img src="' + obj.logo + '">';
+                    html += ' <em><b>' + obj.name + '</b></em>';
+                    html += ' </a>';
+                });
+                if (html != "") {
+                    setTimeout(function () {
+                        $("#lib").html(html);
+                        $("#embody").show();
+                    }, 100);
+                }
+            }
+        } catch (err)
+        { }
+
+    });
+</script>
+                <div class="category clearfix">
+            <div class="category_l">
+                <img src="https://csdnimg.cn/release/phoenix/images/category_icon.jpg">
+                <span>分类：</span>
+            </div>
+            <div class="category_r">
+                                            <label  onclick="GetCategoryArticles('7463994','u012613903','top','79498942');">
+                    <span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_fenlei']);">
+                       python3笔记<em>（9）</em>
+                    </span>
+                    <img class="arrow-down" src="https://csdnimg.cn/release/phoenix/images/arrow_triangle _down.jpg" style="display:inline;">
+                    <img class="arrow-up" src="https://csdnimg.cn/release/phoenix/images/arrow_triangle_up.jpg" style="display:none;">
+                    <div class="subItem">
+                        <div class="subItem_t">
+                            <a  href="//blog.csdn.net/u012613903/article/category/7463994"  target="_blank">作者同类文章</a>
+                            <i class="J_close">X</i>
+                        </div>
+                        <ul class="subItem_l" id="top_7463994"></ul>
+                    </div>
+                </label>
+                                        </div>
+        </div>
+                <div class="bog_copyright">
+                        <p class="copyright_p" >
+                版权声明：本文为博主原创文章，未经博主允许不得转载。                http://blog.csdn.net/u012613903/article/details/79498942            </p>
+                    </div>
+        <div id="article_content" class="article_content csdn-tracking-statistics" data-pid="blog"  data-mod=popu_307  data-dsm = "post" >
+                    <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/production/htmledit_views-1f9cf0a071.css" />
+            <div class="htmledit_views">
+                <pre class="python"># -*- coding:utf-8 -*-
+# Author: Evan Mi
+import re
+"""
+'.'     默认匹配除\n之外的任意一个字符，若指定flag DOTALL,则匹配任意字符，包括换行
+'^'     匹配字符开头，若指定flags MULTILINE,这种也可以匹配上(r"^a","\nabc\neee",flags=re.MULTILINE)
+'$'     匹配字符结尾，或e.search("foo$","bfoo\nsdfsf",flags=re.MULTILINE).group()也可以
+'*'     匹配*号前的字符0次或多次，re.findall("ab*","cabb3abcbbac")  结果为['abb', 'ab', 'a']
+'+'     匹配前一个字符1次或多次，re.findall("ab+","ab+cd+abb+bba") 结果['ab', 'abb']
+'?'     匹配前一个字符1次或0次
+'{m}'   匹配前一个字符m次
+'{n,m}' 匹配前一个字符n到m次，re.findall("ab{1,3}","abb abc abbcbbb") 结果'abb', 'ab', 'abb']
+'|'     匹配|左或|右的字符，re.search("abc|ABC","ABCBabcCD").group() 结果'ABC'
+'(...)' 分组匹配，re.search("(abc){2}a(123|456)c", "abcabca456c").group() 结果 abcabca456c
+ 
+ 
+'\A'    只从字符开头匹配，re.search("\Aabc","alexabc") 是匹配不到的
+'\Z'    匹配字符结尾，同$
+'\d'    匹配数字0-9
+'\D'    匹配非数字
+'\w'    匹配[A-Za-z0-9]
+'\W'    匹配非[A-Za-z0-9]
+'s'     匹配空白字符、\t、\n、\r , re.search("\s+","ab\tc1\n3").group() 结果 '\t'
+'(?P&lt;name&gt;...)' 分组匹配 re.search("(?P&lt;province&gt;[0-9]{4})(?P&lt;city&gt;[0-9]{2})(?P&lt;birthday&gt;[0-9]{4})",
+"371481199306143242").groupdict("city")
+ 结果{'province': '3714', 'city': '81', 'birthday': '1993'}
+
+
+最常用的匹配语法
+re.match 从头开始匹配
+re.search 匹配包含
+re.findall 把所有匹配到的字符放到以列表中的元素返回
+findall()返回的是括号所匹配到的结果（如regex1），多个括号就会返回多个括号分别匹配到的结果（如regex），
+如果没有括号就返回就返回整条语句所匹配到的结果(如regex2)。所以在提取数据的时候就需要注意这个坑
+print(re.sub('(.)\\1*', "2", test)) \1是代表第一个括号中的值
+print(re.findall('(.)\\1*', test))
+re.split 以匹配到的字符当做列表分隔符
+re.sub      匹配字符并替换
+"""
+
+</pre><br />            </div>
+                </div>
+        <div class="readall_box csdn-tracking-statistics tracking-click"  data-pid="blog"  data-mod="popu_596">
+        <div class="read_more_mask"></div>
+            <a class="btn btn-large btn-gray-fred read_more_btn" target="_self">阅读全文</a>
+        </div>
+        <ul class="article_next_prev">
+                                    <li class="prev_article">
+                <span  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian']);location.href='http://blog.csdn.net/u012613903/article/details/79481597';">上一篇</span>
+                <a href="http://blog.csdn.net/u012613903/article/details/79481597" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian'])">python3 中方法各种参数和返回值</a>
+            </li>
+            
+                    </ul>
+        <div style="clear:both; height:10px;"></div>
+    </div>
+
+        <!--文章底部广告位-->
+    <div id="article_ad">
+        <!-- 广告位：PC端-博客详情页底部banner-760*90 -->
+        <script type="text/javascript" src="//cee1.iteye.com/pkccmgslc.js"></script>
+    </div>
+    
+    <!--评论区-->
+    <div class="comment_class">
+        <div class="commentform" id="comments"></div>
+        <div id="comment_form">
+
+        </div>
+        <div id="comment_title" class="panel_head">
+            <span class="see_comment">查看评论</span><a name="comments" ></a></div>
+        <div id="comment_list">
+
+        </div>
+        <div id="comment_bar">
+        </div>
+    </div>
+
+    <!--推荐列表-->
+    <div class="recommend_list">
+                                            <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="http://blog.csdn.net/tigerking1017/article/details/77839822"  target="_blank" strategy="BlogCommendFromQuerySearch_0">
+                    <dd>
+                        <h2>正则表达式 python3.x (re模块)</h2>
+                        <div class="summary">
+                            ============================ re.compile ============================
+
+re.compile可以把正则表达式编译成一个正则表达式...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="//avatar.csdn.net/9/3/8/3_tigerking1017.jpg" alt="tigerking1017" title="tigerking1017"></li>
+                            <li class="user_name">tigerking1017</li>
+                            <li class="time">2017年09月04日 17:35</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>159</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="http://blog.csdn.net/BobZhangfighting/article/details/59484233"  target="_blank" strategy="BlogCommendFromQuerySearch_1">
+                    <dd>
+                        <h2>Python3 re模块</h2>
+                        <div class="summary">
+                            正则表达式（Regular Expression）是字符串处理的常用工具，通常被用来检索、替换那些符合某个模式（Pattern）的文本。很多程序设计语言都支持正则表达式，像Perl、Java、C/C+...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="//avatar.csdn.net/6/4/C/3_bobzhangfighting.jpg" alt="BobZhangfighting" title="BobZhangfighting"></li>
+                            <li class="user_name">BobZhangfighting</li>
+                            <li class="time">2017年03月02日 11:06</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>498</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                          <dl class="">
+            <script>
+            (function() {
+              var s = "_" + Math.random().toString(36).slice(2);
+              document.write('<div id="' + s + '"></div>');
+              (window.slotbydup=window.slotbydup || []).push({
+                id: '4765209',
+                container: s,
+                size: '808,120',
+                display: 'inlay-fix'
+              });
+            })();
+            </script>
+          </dl>
+                                        <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="http://blog.csdn.net/peace1213/article/details/48950593"  target="_blank" strategy="BlogCommendFromQuerySearch_2">
+                    <dd>
+                        <h2>python3爬虫之入门和正则表达式</h2>
+                        <div class="summary">
+                            前面的python3入门系列基本上也对python入了门，从这章起就开始介绍下python的爬虫教程，拿出来给大家分享；爬虫说的简单，就是去抓取网路的数据进行分析处理；这章主要入门，了解几个爬虫的小测...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="//avatar.csdn.net/8/E/0/3_peace1213.jpg" alt="peace1213" title="peace1213"></li>
+                            <li class="user_name">peace1213</li>
+                            <li class="time">2015年10月07日 17:36</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>6762</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="http://blog.csdn.net/onlysee8/article/details/50718553"  target="_blank" strategy="BlogCommendFromQuerySearch_3">
+                    <dd>
+                        <h2>用python3.x正则表达式匹配中文字符串</h2>
+                        <div class="summary">
+                            re.match('^[\u4e00-\u9fa5|，。；？]+\?$','你好哈人日你，妈我。我？；们我為啥說在張志這?')
+
+这演示了简体，繁体，中文标点符号等等。可以看出python3.x对于中...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="//avatar.csdn.net/B/2/1/3_onlysee8.jpg" alt="onlysee8" title="onlysee8"></li>
+                            <li class="user_name">onlysee8</li>
+                            <li class="time">2016年02月22日 18:47</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>4605</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="http://blog.csdn.net/SeeTheWorld518/article/details/49302829"  target="_blank" strategy="BlogCommendFromQuerySearch_4">
+                    <dd>
+                        <h2>Python 正则表达式（分组）</h2>
+                        <div class="summary">
+                            正则表达式分组分组就是用一对圆括号“()”括起来的正则表达式，匹配出的内容就表示一个分组。从正则表达式的左边开始看，看到的第一个左括号“(”表示第一个分组，第二个表示第二个分组，依次类推，需要注意的是...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="//avatar.csdn.net/E/4/1/3_seetheworld518.jpg" alt="SeeTheWorld518" title="SeeTheWorld518"></li>
+                            <li class="user_name">SeeTheWorld518</li>
+                            <li class="time">2015年10月21日 12:47</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>6812</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="http://blog.csdn.net/github_38196368/article/details/70456082"  target="_blank" strategy="BlogCommendFromQuerySearch_5">
+                    <dd>
+                        <h2>Python 3.6 re模块基本函数介绍</h2>
+                        <div class="summary">
+                            python 3.6版本基本函数介绍以及match object介绍                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="//avatar.csdn.net/B/5/7/3_github_38196368.jpg" alt="github_38196368" title="github_38196368"></li>
+                            <li class="user_name">github_38196368</li>
+                            <li class="time">2017年04月22日 16:21</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1665</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="http://blog.csdn.net/lidongone/article/details/23476621"  target="_blank" strategy="BlogCommendFromQuerySearch_6">
+                    <dd>
+                        <h2>Python3.x学习笔记[2.5]灵活使用urllib与re</h2>
+                        <div class="summary">
+                            我真的很无聊。。。
+
+
+
+
+为了让家里能最简单的用上免费的网络电话，我用...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="//avatar.csdn.net/7/8/9/3_lidongone.jpg" alt="lidongone" title="lidongone"></li>
+                            <li class="user_name">lidongone</li>
+                            <li class="time">2014年04月11日 21:35</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>921</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="http://blog.csdn.net/qq_36482772/article/details/53389701"  target="_blank" strategy="BlogCommendFromQuerySearch_7">
+                    <dd>
+                        <h2>Python3-正则表达式-创建、匹配Regex对象</h2>
+                        <div class="summary">
+                            用正则表达式查找文本模式字符串中查找电话号码。只知道模式: 3个数字，一个短横线,4个数字,一个短横线,再是4个数字。例如:010-8888-8888,或010.8888.8888或(010) 888...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="//avatar.csdn.net/0/C/C/3_qq_36482772.jpg" alt="qq_36482772" title="qq_36482772"></li>
+                            <li class="user_name">qq_36482772</li>
+                            <li class="time">2016年11月29日 10:23</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1408</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="http://blog.csdn.net/lisong694767315/article/details/39697137"  target="_blank" strategy="BlogCommendFromQuerySearch_8">
+                    <dd>
+                        <h2>Python3标准库（二） re模块</h2>
+                        <div class="summary">
+                            正则表达式（Regular Expression）是字符串处理的常用工具，通常被用来检索、替换那些符合某个模式（Pattern）的文本。很多程序设计语言都支持正则表达式，像Perl、Java、C/C+...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="//avatar.csdn.net/0/F/0/3_lisong694767315.jpg" alt="lisong694767315" title="lisong694767315"></li>
+                            <li class="user_name">lisong694767315</li>
+                            <li class="time">2014年09月30日 16:03</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>7482</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="http://blog.csdn.net/eroswang/article/details/1677782"  target="_blank" strategy="BlogCommendFromQuerySearch_9">
+                    <dd>
+                        <h2>python中正则表达式与re 模块</h2>
+                        <div class="summary">
+                            1. 9.7 正则表达式与 re 模块一个正则表达式就是一个用来表示某种模式的字符串。它能帮助你方便的检查一个字符串是否与某种模式匹配。 re 模块使 Python 语言拥有全部的正则表达式功能。 c...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="//avatar.csdn.net/E/5/D/3_eroswang.jpg" alt="eroswang" title="eroswang"></li>
+                            <li class="user_name">eroswang</li>
+                            <li class="time">2007年07月03日 23:23</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>21183</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                            </div>
+   <div id="ad_bot"></div>
+    <div id="report_dialog"></div>
+    <div id="pop_win" style="display:none ;position: absolute; z-index: 10000; border: 1px solid rgb(220, 220, 220); top: 222.5px; left: 630px; opacity: 1; background: none 0px 0px repeat scroll rgb(255, 255, 255);">
+    </div>
+    <div id="popup_mask"></div>
+    <style>
+        #popup_mask
+        {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9999;
+            left: 0px;
+            top: 0px;
+            opacity: 0.3;
+            filter: alpha(opacity=30);
+            display: none;
+        }
+
+    </style>
+    <div class="clear">
+    </div>
+</div>
+            </div>
+        </div>
+        <div id="side" class="side">
+    <div>
+                    <div id="panel_Profile" class="panel">
+    <ul class="panel_head"><span>个人资料</span></ul>
+    <ul class="panel_body profile">
+        <div class=" user_info">
+    <dl class="inf_bar clearfix">
+        <dt class="csdn-tracking-statistics tracking-click" data-mod="popu_381">
+                <a href="//blog.csdn.net/u012613903" target="_blank">
+                    <img src="//avatar.csdn.net/3/F/E/3_u012613903.jpg" class="avatar_pic">
+        </a>
+      </dt><dd>
+            <h3 class="csdn-tracking-statistics tracking-click"  data-mod="popu_380"><a href="//blog.csdn.net/u012613903" target="_blank" id="uid">u012613903</a></h3>
+            <div class="medals" title="">
+                      </div>
+                    </dd>
+    </dl>
+    <div class="inf_number_box clearfix">
+        <dl title="87">
+            <dt>原创</dt>
+            <dd>87</dd>
+        </dl>
+        <dl title="50">
+            <dt>粉丝</dt>
+            <dd id='fan'>50</dd>
+        </dl>
+        <dl title="68">
+            <dt>喜欢</dt>
+            <dd>68</dd>
+        </dl>
+        <dl title="52">
+          <dt>评论</dt>
+          <dd>52</dd>
+        </dl>
+    </div>
+
+</div>
+<div class="interflow clearfix">
+      <div class="badge gradeAndbadge">
+        <div>
+                        <img src='//csdnimg.cn/jifen/images/xunzhang/xunzhang/zhuanlandaren.png' alt='专栏达人'>
+                                    <img src='//csdnimg.cn/jifen/images/xunzhang/xunzhang/chizhiyiheng.png' alt='持之以恒'>
+                                            </div>
+    </div>
+      <div class="grade gradeAndbadge gradewidths">
+      <span>等级：</span>
+      <div>
+        <a href="http://blog.csdn.net/home/help.html#level" title="5级,点击查看等级说明" target="_blank">
+          <img class="grade-img" src="//csdnimg.cn/jifen/images/xunzhang/jianzhang/blog5.png" alt="5级,点击查看等级说明">
+        </a>
+      </div>
+    </div>
+    <div class="gradeAndbadge gradewidths" title="548406">
+        <span>访问量：</span>
+        <span class="num odd-overhidden">54万+</span>
+    </div>
+
+    <div class="gradeAndbadge gradewidths" title="4789">
+      <span>积分：</span>
+      <span  class="num odd-overhidden">4789</span>
+    </div>
+    <div class="gradeAndbadge gradewidths" title="7330">
+        <span>排名：</span>
+        <span class="num odd-overhidden">7330</span>
+    </div>
+
+</div>
+<script type="text/javascript">
+  // 判断并设置用户名位置，没有博客专家与关注按钮时，用户名居中
+  $medals_children = $('.medals').children().length;
+  $span_add_follow = $('#span_add_follow').length;
+  if($medals_children === 0 && $span_add_follow === 0){
+    $('.inf_bar dd').css('vertical-align','10px')
+  }
+</script>    </ul>
+</div>
+
+                            <div id="homepageArticles" class="panel csdn-tracking-statistics" data-pid="blog" data-mod="popu_4" style="height:250px;">
+    <div id="cpro_u2734133" style="text-align:center;">
+        <!-- 投放代码 -->
+        <script type="text/javascript" src="//cee1.iteye.com/bwlxosfoo.js"></script>
+    </div>
+</div>
+                                <div class="panel" id="panel_Search">
+    <ul class="panel_head"><span>文章搜索</span></ul>
+    <ul class="panel_body" class="form_search">
+        <form id="frmSearch" class="form_search csdn-tracking-statistics" data-pid="blog" target="_blank" data-mod="popu_306">
+            <span><input id="inputSearch" type="text" class="blogsearch" title="请输入关键字"/></span>
+            <input id="btnSubmit" type="button" value="搜索" title="search in blog"/>
+        </form>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").unbind("click");
+        $("#btnSubmit").click(function () {
+            search();
+        });
+
+        $("#frmSearch").submit(function () {
+            search();
+            return false;
+        });
+        function search() {
+            if ($("#inputSearch").val() == "") {
+                alert("请录入搜索关键词！");
+                return false;
+            }
+            var url = CFG.SO_URL + "?q=" + encodeURIComponent($("#inputSearch").val())+'&t=blog&u='+username;
+            // window.location.href = url;
+            window.open(url)
+        }
+    });
+</script>
+
+                                <div id="panel_Category" class="panel">
+    <ul class="panel_head">
+        <span>博客专栏</span>
+    </ul>
+    <ul class="panel_body" id="sp_column">
+                <table cellpadding="0" cellspacing="0">
+                        <tr>
+                <td style="padding:10px 10px 0 0;">
+                	<a href="//blog.csdn.net/column/details/14322.html" target="_blank">
+                        <img src="http://img.blog.csdn.net/20170119152940272" style="width:75px;height:75px;" />
+                    </a>
+                </td>
+                <td style="padding:10px 0; vertical-align:top;">
+                    <a href="//blog.csdn.net/column/details/14322.html" target="_blank">activiti5流程引擎学习</a>
+                    <p>文章：11篇</p>
+                    <span>阅读：125981</span>
+                </td>
+            </tr>
+                    </table>
+            </ul>
+</div>
+
+                                <div id="panel_Category" class="panel">
+    <ul class="panel_head"><span>文章分类</span></ul>
+    <ul class="panel_body">
+                        <li>
+            <a href="//blog.csdn.net/u012613903/article/category/2820693" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                activiti            </a>
+            <span>(11)</span>
+        </li>
+                <li>
+            <a href="//blog.csdn.net/u012613903/article/category/2842081" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                设计模式            </a>
+            <span>(24)</span>
+        </li>
+                <li>
+            <a href="//blog.csdn.net/u012613903/article/category/2875975" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                java基础            </a>
+            <span>(17)</span>
+        </li>
+                <li>
+            <a href="//blog.csdn.net/u012613903/article/category/5907353" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                微信二次开发java            </a>
+            <span>(3)</span>
+        </li>
+                <li>
+            <a href="//blog.csdn.net/u012613903/article/category/6013585" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                spring            </a>
+            <span>(1)</span>
+        </li>
+                <li>
+            <a href="//blog.csdn.net/u012613903/article/category/6038703" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                ORM框架            </a>
+            <span>(2)</span>
+        </li>
+                <li>
+            <a href="//blog.csdn.net/u012613903/article/category/6284692" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                LINUX            </a>
+            <span>(3)</span>
+        </li>
+                <li>
+            <a href="//blog.csdn.net/u012613903/article/category/6404646" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                hadoop体系            </a>
+            <span>(8)</span>
+        </li>
+                <li>
+            <a href="//blog.csdn.net/u012613903/article/category/6684473" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                storm相关            </a>
+            <span>(5)</span>
+        </li>
+                <li>
+            <a href="//blog.csdn.net/u012613903/article/category/6687819" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                shiro相关            </a>
+            <span>(2)</span>
+        </li>
+                <li>
+            <a href="//blog.csdn.net/u012613903/article/category/6688263" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                ueditor            </a>
+            <span>(2)</span>
+        </li>
+                <li>
+            <a href="//blog.csdn.net/u012613903/article/category/7252757" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                杂            </a>
+            <span>(1)</span>
+        </li>
+                <li>
+            <a href="//blog.csdn.net/u012613903/article/category/7320903" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                scala            </a>
+            <span>(3)</span>
+        </li>
+                <li>
+            <a href="//blog.csdn.net/u012613903/article/category/7388925" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                算法            </a>
+            <span>(4)</span>
+        </li>
+                <li>
+            <a href="//blog.csdn.net/u012613903/article/category/7463994" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                python3笔记            </a>
+            <span>(10)</span>
+        </li>
+                    </ul>
+</div>
+
+                                <div id="panel_Archive" class="panel">
+    <ul class="panel_head"><span>文章存档</span></ul>
+    <ul class="panel_body">
+        <div id="archive_list">
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2018/03">2018年3月</a>
+               <span>(4)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2018/02">2018年2月</a>
+               <span>(6)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2018/01">2018年1月</a>
+               <span>(4)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2017/12">2017年12月</a>
+               <span>(3)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2017/11">2017年11月</a>
+               <span>(1)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2017/10">2017年10月</a>
+               <span>(1)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2017/08">2017年8月</a>
+               <span>(1)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2017/06">2017年6月</a>
+               <span>(2)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2017/05">2017年5月</a>
+               <span>(1)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2017/03">2017年3月</a>
+               <span>(2)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2017/02">2017年2月</a>
+               <span>(1)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2017/01">2017年1月</a>
+               <span>(3)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2016/12">2016年12月</a>
+               <span>(2)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2016/11">2016年11月</a>
+               <span>(6)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2016/10">2016年10月</a>
+               <span>(2)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2016/09">2016年9月</a>
+               <span>(1)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2016/08">2016年8月</a>
+               <span>(1)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2016/07">2016年7月</a>
+               <span>(2)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2016/06">2016年6月</a>
+               <span>(3)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2016/05">2016年5月</a>
+               <span>(1)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2016/04">2016年4月</a>
+               <span>(1)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2016/03">2016年3月</a>
+               <span>(2)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2016/02">2016年2月</a>
+               <span>(1)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2015/12">2015年12月</a>
+               <span>(3)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2015/11">2015年11月</a>
+               <span>(1)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2015/10">2015年10月</a>
+               <span>(1)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2015/05">2015年5月</a>
+               <span>(1)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2015/04">2015年4月</a>
+               <span>(1)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2015/03">2015年3月</a>
+               <span>(20)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2015/02">2015年2月</a>
+               <span>(6)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="//blog.csdn.net/u012613903/article/month/2015/01">2015年1月</a>
+               <span>(12)</span>
+            </li>
+                    </div>
+    </ul>
+</div>
+
+                                <div id="hotarticls" class="panel csdn-tracking-statistics" data-pid="blog" data-mod="popu_340">
+    <ul class="panel_head"><span>阅读排行</span></ul>
+    <ul class="panel_body itemlist">
+                        <li>
+            <a href="http://blog.csdn.net/u012613903/article/details/51740942" title="Spring项目中使用webservice实现h5的websocket通信">
+                Spring项目中使用webservice实现h5的websocket通信            </a>
+            <span>(36657)</span>
+        </li>
+                <li>
+            <a href="http://blog.csdn.net/u012613903/article/details/43732941" title="Activiti5第十一弹，流程监听器与任务监听器">
+                Activiti5第十一弹，流程监听器与任务监听器            </a>
+            <span>(21004)</span>
+        </li>
+                <li>
+            <a href="http://blog.csdn.net/u012613903/article/details/45394401" title="部署自己的tomcat,让tomcat和IIS共同享用服务器的80端口">
+                部署自己的tomcat,让tomcat和IIS共同享用服务器的80端口            </a>
+            <span>(18581)</span>
+        </li>
+                <li>
+            <a href="http://blog.csdn.net/u012613903/article/details/42709917" title="activiti5第五弹 serviceTask中的webserviceTask 以及 shellTask">
+                activiti5第五弹 serviceTask中的webserviceTask 以及 shellTask            </a>
+            <span>(15864)</span>
+        </li>
+                <li>
+            <a href="http://blog.csdn.net/u012613903/article/details/42677635" title="activiti5第四弹----serviceTask中的java服务任务">
+                activiti5第四弹----serviceTask中的java服务任务            </a>
+            <span>(15359)</span>
+        </li>
+                <li>
+            <a href="http://blog.csdn.net/u012613903/article/details/42493801" title="activiti5第一弹-----基本的activiti示例">
+                activiti5第一弹-----基本的activiti示例            </a>
+            <span>(15212)</span>
+        </li>
+                <li>
+            <a href="http://blog.csdn.net/u012613903/article/details/43051673" title="Activiti5第七弹，自己实现一个ProcessEngineConfiguration同时自定义拦截器">
+                Activiti5第七弹，自己实现一个ProcessEngineConfiguration同时自定义拦截器            </a>
+            <span>(13699)</span>
+        </li>
+                <li>
+            <a href="http://blog.csdn.net/u012613903/article/details/50370173" title="mybatis自己学习的一些总结">
+                mybatis自己学习的一些总结            </a>
+            <span>(13342)</span>
+        </li>
+                <li>
+            <a href="http://blog.csdn.net/u012613903/article/details/43266827" title="Activiti5第九弹，Group和User，Activiti的用户和用户组">
+                Activiti5第九弹，Group和User，Activiti的用户和用户组            </a>
+            <span>(11241)</span>
+        </li>
+                <li>
+            <a href="http://blog.csdn.net/u012613903/article/details/53337955" title="js中使用shiro标签的一个小坑">
+                js中使用shiro标签的一个小坑            </a>
+            <span>(10469)</span>
+        </li>
+                    </ul>
+</div>
+
+                                <div id="newcomments" class="panel">
+    <ul class="panel_head"><span>最新评论</span></ul>
+    <ul class="panel_body itemlist">
+                <li>
+            <a href="http://blog.csdn.net/u012613903/article/details/42493801#comments">activiti5第一弹-----...</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/taovslong" class="user_name">taovslong</a>:
+                http://www.itmayun.com/it/files/226631678709806/r...            </p>
+        </li>
+                <li>
+            <a href="http://blog.csdn.net/u012613903/article/details/53337955#comments">js中使用shiro标签的一个小坑</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/muzi1314_" class="user_name">muzi1314_</a>:
+                这是js加载不了jsp标签的结果吧，jsp页面加载的问题。            </p>
+        </li>
+                <li>
+            <a href="http://blog.csdn.net/u012613903/article/details/50370173#comments">mybatis自己学习的一些总结</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/weixin_40451368" class="user_name">weixin_40451368</a>:
+                楼主真心不错，最近搭建那一块老出问题            </p>
+        </li>
+                <li>
+            <a href="http://blog.csdn.net/u012613903/article/details/78361383#comments">如何理解矩阵</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/mutao1127877836" class="user_name">mutao1127877836</a>:
+                大一学生路过，收藏了以后慢慢看。            </p>
+        </li>
+                <li>
+            <a href="http://blog.csdn.net/u012613903/article/details/51086429#comments">pushlet单播与多播</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/u012613903" class="user_name">u012613903</a>:
+                [reply]derrickie[/reply]
+你的JDK的版本是多少？TOMCAT版本呢            </p>
+        </li>
+                <li>
+            <a href="http://blog.csdn.net/u012613903/article/details/43084081#comments">Activiti5第八弹,Proc...</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/u011561335" class="user_name">u011561335</a>:
+                楼主如果能总结一下那个更方便就更好了            </p>
+        </li>
+                <li>
+            <a href="http://blog.csdn.net/u012613903/article/details/51086429#comments">pushlet单播与多播</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/derrickie" class="user_name">derrickie</a>:
+                [code=java]
+Caused by: java.lang.UnsupportedClass...            </p>
+        </li>
+                <li>
+            <a href="http://blog.csdn.net/u012613903/article/details/43306755#comments">装饰器模式 decorator</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/sunxili520" class="user_name">sunxili520</a>:
+                666 就喜欢这种直接代码式解读的文章 哈哈            </p>
+        </li>
+                <li>
+            <a href="http://blog.csdn.net/u012613903/article/details/42709917#comments">activiti5第五弹 serv...</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/qq609774549" class="user_name">qq609774549</a>:
+                哥哥，你的教程 不适合新手看。。。
+到这儿 我就接不下去了。 
+userTask-webServi...            </p>
+        </li>
+                <li>
+            <a href="http://blog.csdn.net/u012613903/article/details/42580927#comments">activiti5第三弹-----...</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/qq609774549" class="user_name">qq609774549</a>:
+                y没有定义，能直接使用吗？            </p>
+        </li>
+            </ul>
+</div>
+
+                            <div id="nav_show_top_stop" class="clearfix" style="z-index:1000;width:300px;">
+                          <div id="cpro_u3031286" class="csdn-tracking-statistics" data-pid="blog" data-view="true" data-mod="ad_popu_189" data-mtp="63"
+                    data-order="40" data-con="ad_content_1259" style="text-align:center;background-color:#fff;">
+                   <!-- 投放代码 -->
+                   <script type="text/javascript" src="//cee1.iteye.com/bwocoflyv.js"></script>
+               </div>
+                        <div class="persion_article"></div>
+        </div>
+        <script type="text/javascript">
+            var naviga_offsetTop;
+            $(function(){
+                resetleftTop();
+                $(window).scroll(function(){
+                    var scrollTop = $(document).scrollTop();
+
+                    if (scrollTop > naviga_offsetTop) {
+                        jQuery("#nav_show_top_stop").css({"position": "fixed"});
+                        jQuery("#nav_show_top_stop").css({"top": "2px"});
+                    } else {
+                        jQuery("#nav_show_top_stop").css({"position": "static"});
+                    }
+                });
+            });
+
+            function resetleftTop(){
+                naviga_offsetTop = $("#nav_show_top_stop").position().top;
+            }
+
+        </script>
+    </div>
+    <div class="clear"></div>
+</div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="left_fixed">
+  <div class="left_show_button">
+    <span>
+      <i class="icon iconfont icon-youjiantou"></i>
+    </span>
+</div>
+
+    <ul class="left_menu" id="share_box">
+        <li>
+            <button class="left-fixed-btn btn-like csdn-tracking-statistics tracking-click" data-mod="popu_373" target="_self" title="点赞">
+                <a href="javascript:void(0);" class="iconbox border_red" ><i class="icon iconfont icon-dianzan"></i></a>
+                <a class="txt" href="javascript:void(0);">0</a>
+            </button>
+        </li>
+        <li>
+            <button class="left-fixed-btn csdn-tracking-statistics tracking-click btn-collect" data-mod="popu_374"  target="_self" title="收藏">
+                <a href="javascript:void(0);" class="iconbox border_purple" ><i class="icon iconfont icon-shoucang"></i></a>
+            </button>
+        </li>
+        <li>
+            <button class="left-fixed-btn btn-pinglun csdn-tracking-statistics tracking-click" data-mod="popu_544" title="评论">
+            <a href="javascript:void(0);" class="iconbox border_purple" ><i class="icon iconfont icon-pinglun"></i></a>
+            </button>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_tsina outside left-fixed-btn" data-cmd="tsina" title="分享到新浪微博"></a>
+            <span class="iconbox border_red2"><i class="icon iconfont icon-xinlang"></i></span>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_weixin outside left-fixed-btn" data-cmd="weixin" title="分享到微信"></a>
+            <span class="iconbox border_green"><i class="icon iconfont icon-weixin"></i></span>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_qzone outside left-fixed-btn" data-cmd="qzone" title="分享到QQ空间"></a>
+            <span class="iconbox border_blue"><i class="icon iconfont icon-QQ"></i></span>
+        </li>
+    </ul>
+</div>
+<div id="a52b5334d" style="width: 1px; height: 1px; display: none;">
+    <script id="adJs52b5334"></script>
+    <script>document.getElementById("adJs52b5334").src = "https://ads.csdn.net/js/opt/52b5334.js?t=" + Math.random();</script>
+</div>
+<script src="//csdnimg.cn/public/common/append_mark/appendMark.min.js?v=5.00.43" type="text/javascript"></script>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = '//csdnimg.cn/static/api/js/share.js?v=89860594'];</script>
+<script type="text/javascript">
+    $(function(){
+        setTimeout(function(){
+            $(".comment_body:contains('回复')").each(function(index,item){
+                var u=$(this).text().split('：')[0].toString().replace("回复","")
+                var thisComment=$(this);
+                if(u)
+                {
+                    $.getJSON("https://passport.csdn.net/get/nick?callback=?", {users: u}, function(a) {
+                        if(a!=null&&a.data!=null&&a.data.length>0)
+                        {
+                            nick=a.data[0].n;
+                            if(u!=nick)
+                            {
+                                thisComment.text(thisComment.text().replace(u,nick));
+                            }
+                        }
+                    });
+                }
+            });
+
+        },200);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },5000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },10000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },15000);
+
+    });
+
+    appendMark($('.recommend_list').children('a').find('dt'),$('.extension_other'));
+
+    $(function () {
+        $('pre.prettyprint code').each(function () {
+            var lines = $(this).text().split('\n').length;
+            var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+            $(this).addClass('has-numbering').parent().append($numbering);
+            for (i = 1; i <= lines; i++) {
+                $numbering.append($('<li/>').text(i));
+            };
+            $numbering.fadeIn(1700);
+        });
+    });
+</script>
+     <!--右下角弹窗广告-->
+<div class="csdn-tracking-statistics" data-pid="blog" data-view="true" data-mod="ad_popu_72" data-mtp="62"
+     data-order="40" data-con="ad_content_2072">
+    <!--右下角弹窗广告-->
+    <script id="popuLayer_js_q" src="//ads.csdn.net/js/popuLayer.js" defer="defer" type="text/javascript"></script>
+    <div id="layerd" style="position: fixed;bottom:0px;right:0px;line-height:0px;display:none;z-index:1000;" >
+        <div class="J_close layer_close"
+             style="background-color:#efefef;padding:0px;color:#333;font:12px/24px Helvetica,Tahoma,Arial,sans-serif;text-align:right;">
+            关闭
+        </div>
+        <!-- 广告占位容器 -->
+        <div id="cpro_u3026784">
+            <!-- 列表页广告 -->
+                    <!-- 详情页iteye广告-->
+            <script type="text/javascript" src="//cee1.iteye.com/idvveasfs.js"></script>
+                 </div>
+    </div>
+    <script type='text/javascript'>
+        document.getElementById("popuLayer_js_q").onload = function () {
+            var styObjd = styObj = {width: "250px", "height": parseInt(250) + 28};
+            window.CSDN.Layer.PopuLayer("#layerd", {
+                storageName: "layerd",
+                styleObj: styObjd,
+                total: 50,
+                expoire: 1000 * 60
+            });
+        }
+        $(function(){
+          function resize_show(){
+            var win_width = $(window).width();
+            if(win_width>1600){
+              $('#layerd').fadeIn()
+            }else{
+              $('#layerd').hide()
+            }
+          }
+          resize_show();
+          $(window).resize(resize_show);
+        })
+    </script>
+</div>
+     <div style="display:none;">
+    <img src="" onerror='setTimeout(function(){if(!/(csdn.net|iteye.com|baiducontent.com|googleusercontent.com|360webcache.com|sogoucdn.com|bingj.com|baidu.com)$/.test(window.location.hostname)){window.location. href="\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74"}},3000);'>
+</div>
+<script src="//csdnimg.cn/pubfooter/js/publib_footer-1.0.3.js?20180309"  type="text/javascript"></script>
+<script src="//csdnimg.cn//release/phoenix/bloglist/iconfont/iconfont.js?v=2017.065"  type="text/javascript" ></script>
+<script src='//csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v1521531018'></script>
+<script>
+    GoTop({
+        hasReport: true,
+        reportFun: function() {
+            $.createMask();
+            var r = blog_address + "/common/report?id=" + fileName + "&t=" + 2;
+            if (3 == 2) {
+                var s = n.parentNode.parentNode.parentNode.getAttribute("floor");
+                r += "&floor=" + s
+            }
+            var i = (document.documentElement.clientHeight - 400) / 2 + (document.documentElement.scrollTop || document.body.scrollTop),
+                a = (document.documentElement.clientWidth - 400) / 2;
+
+            $("#report_dialog").load(r).css({
+                //top: i + "px",
+                top: '20%',
+                left: a
+            }).show()
+        }
+    })
+</script>
+</body>
+<script src='//csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v201803151422'></script>
+<script>
+    GoTop({
+        hasReport: true,
+        reportFun: function() {
+            $.createMask();
+            var r = blog_address + "/common/report?id=" + fileName + "&t=" + 2;
+            if (3 == 2) {
+                var s = n.parentNode.parentNode.parentNode.getAttribute("floor");
+                r += "&floor=" + s
+            }
+            var i = (document.documentElement.clientHeight - 400) / 2 + (document.documentElement.scrollTop || document.body.scrollTop),
+                a = (document.documentElement.clientWidth - 400) / 2;
+
+            $("#report_dialog").load(r).css({
+                //top: i + "px",
+                top: '20%',
+                left: a
+            }).show()
+        }
+    })
+</script>
+<script>
+$(".MathJax").remove();
+</script>
+<script type="text/javascript" src="//static.blog.csdn.net/mdeditor/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="//static-blog.csdn.net/mdeditor/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="http://dup.baidustatic.com/js/os.js"></script>
+</html>

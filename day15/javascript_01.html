@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--
+    javaScript的变量：
+      name = 'alex' #全局变量
+      var name = 'eric' #局部变量
+    数字：javascript中所有的数字类型都是浮点数,不区分整数和浮点数
+    -->
+    <script type="text/javascript">
+        //数字开始
+        age = 18
+        i = parseInt("18")
+        j = parseFloat("18")
+
+        //函数
+        //function f1() {
+        //    console.log("1")
+        //}
+        
+        //定时器
+        //setInterval("f1()", 5000);
+        //列表（数组）
+        alist = [0, 1, 2, 3, 4, 5]
+        alist.length  //数组的大小
+        alist.push(12) //尾部追加元素
+        alist.pop()  //尾部获取一个元素
+        alist.unshift(33) //头部插入元素
+        alist.shift() //头部获取一个元素
+        //           起始位置  删除的元素个数  插入的元素
+        alist.splice(1,        1,              99,22,33)
+        //可以演变出多种操作
+        //alist.splice(n,0,val)指定位置插入元素
+        //alist.splice(n,1,val)指定位置替换元素
+        //alist.splice(n,1) 指定位置删除元素
+        alist.slice(1,3) //截取子串
+        alist.reverse() //反转
+        alist.join(',') //把列表转为字符串,用,连接
+        alist.concat([2,3,4,5]) //和另一个数据连接
+        alist.sort() // 排序
+
+        //字符串开始
+        a = "alex"
+        a.charAt(1) //获得某个位置的字符
+
+        a.length //获取字符串的长度
+        console.info(" aa ".trim())
+        console.info(" aa ".trimLeft())
+        console.info(" aa ".trimRight())
+        console.info(a.concat('eric','linda'))
+        console.info(a.indexOf('le'))  //自序列的起始位置
+        console.info(a.slice(1,3))
+        console.info(a.substring(1,3))  //截取子字符串
+        console.info(a.toLowerCase())
+        console.info(a.toUpperCase())
+        console.info(a.split('e', 2)) //分割以后拿几个
+        //document.getElementById('i1').innerText
+        //字典
+        mydic = {'k1':'v1','k2':'v2','k3':'v3'}
+        console.info(mydic['k1'])
+
+        function pao() {
+            var tag = document.getElementById('i1');
+            var content = tag.innerText;
+            var f = content.charAt(0);
+            var l = content.substring(1, content.length);
+
+            var new_content = l + f;
+            tag.innerText = new_content;
+        }
+        setInterval('pao()',500);
+
+
+
+        //for 循环
+        //1 循环时循环的是索引
+        al = [11,22,33,44]
+        for(var item in al){
+            console.info(a[item])
+        }
+        //循环的是key
+        for(var item in mydic){
+            console.info(mydic[item])
+        }
+        //2
+        for(var i=0;i<10;i++){
+
+        }
+        //条件语句
+        //if(1=="1"){只要值相等就可以了
+        //
+        //}
+        //else if(1==="1"){值相等并且类型相同
+        //
+        //}
+        //else{
+        //
+        //}
+        function ssw(name) {
+            switch(name){
+                case  '1':
+                    alert('1');
+                    break;
+                case '2':
+                    alert('2')
+                    break;
+                default:
+                    alert('default');
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="i1">欢迎老男孩莅临指导</div>
+</body>
+</html>

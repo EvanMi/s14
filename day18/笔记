@@ -1,0 +1,167 @@
+1.JS正则
+
+    test --判断字符串是否符合规定的正则
+    exec --获取匹配的数据,
+            默认取第一个:rep.exec(str);
+            例子:
+            rep = /\d+/;
+            str = "wangshen_67_houyafa_20"
+            rep.exec(str)
+            #["67"]
+
+            rep = /\bJava(\w*)\b/
+            str = "JavaScript is more fun than Java or JavaBeans!"
+            rep.exec(str)
+            #["JavaScript","Script"]
+
+            全局匹配，一个一个的迭代，迭代到没有返回null，在执行就从头开始了
+             rep = /\bJava\w*\b/g  在后面加g
+            str = "JavaScript is more fun than Java or JavaBeans!"
+            rep.exec(str)
+            #["JavaScript"]
+            #["Java"]
+            #["JavaBeans"]
+            #null
+
+            不区分大小写 /../i
+            多行匹配:/.../m   ***默认就是多行匹配，但是加上m以后对^$这个符号，会对每一行进行^$匹配，不加的话就是所有行
+            的第一行的开头作为^,最后一行为$匹配；
+
+
+    js创建正则表达式：var rep = /^\w+$/;
+
+    -登录注册验证：
+        绑定事件
+            默认事件先执行的：
+                checkbox
+            自定义的先执行的：
+                submit,a标签,
+        ==========================================验证===============================================
+
+Bootstrap的东东：
+        所谓响应式：就是利用了css中的@media属性
+        <style>
+        .c1{
+            ...
+        }
+        @media(min-width:700px){
+        .c2{
+            ...
+        }
+        }
+        </style>
+        @font-face指定使用的字体文件
+        !important 自己的样式最最最最最优先
+
+
+
+
+
+测试发现pip3有问题，其实就是pip的版本太低了，升级一下就可以了：python3 -m pip install -U pip
+django安装完成后的目录：Python\Python35\Scripts
+调用命令 django-admin.exe startproject my_project  来创建自己的django程序
+启动：python manage.py runserver [127.0.0.1:8888]
+
+创建后的目录结构
+mysite
+        -mysite     #   对整个程序进行配置
+                -init.py
+                -settings.py  # 配置文件
+                -urls.py    #  URL对应关系
+                -wsgi.py    #(wsgi是一套规则)， 线上用uwsgi + nginx，不能使用python自带的wsgi
+        -manage.py  # 管理Django程序：
+                -python manage.py runserver 运行程序
+                -python manage.py startapp xx 创建app
+                -python manage.py makemigrations
+                -python manage.py migrate  创建数据库
+
+#创建APP
+python manage.py startapp cmdb
+
+app:
+    - migrations  # 数据库修改表结构的操作记录
+        __init__.py # python3中可有可无了
+    - __init__.py
+    - admin.py  #Django为我们提供的后台管理系统
+    - apps.py   #配置当前app的
+    - models.py #ORM,写实体类的地方
+    - tests.py  #单元测试
+    - views.py  #业务代码
+
+
+创建app后优先做两件事：
+    1.配置模版的路径
+                TEMPLATES = [
+                {
+                    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+                    'DIRS': [os.path.join(BASE_DIR, 'templates')]
+                    ,
+                    'APP_DIRS': True,
+                    'OPTIONS': {
+                        'context_processors': [
+                            'django.template.context_processors.debug',
+                            'django.template.context_processors.request',
+                            'django.contrib.auth.context_processors.auth',
+                            'django.contrib.messages.context_processors.messages',
+                        ],
+                    },
+                },
+            ]
+    2.配置静态目录
+                 STATICFILES_DIRS = (
+                    os.path.join(BASE_DIR, 'static'),
+                    )
+
+
+
+
+内容整理：
+    1.创建Django工程
+        Django-admin startproject 工程名
+    2.创建APP
+        python manage.py startapp app名称
+    3.静态文件
+        在project.settings.py
+        STATICFILES_DIRS = (
+            os.path.join(BASE_DIR,'static'),
+        )
+    4.模版路径
+         在project.settings.py 中找到TEMPLATES
+         =>DIRS ==== {os.path.join(BASE_DIR,'templates'),}
+    5.在project.settings中找到 middlerware 注释 csrf
+
+    6.定义路由规则
+       project.urls.py
+            'login'---->函数
+    7.定义视图函数
+        app.views.py
+            def login(request):
+                pass
+       request.method 获取用户的提交方式 GET/POST
+       request.POST.get('xxx') 从POST请求中获取值
+       request..get('xxx') 从GET请求中获取值
+
+       return HttpResponse("字符串"）
+       return render(request,'html模版的路径',{"key","val"})
+       return redirect('只能填URL')
+
+    8.模版渲染
+         特殊的模版语言
+         <html>
+         <body>
+            <div>{{current_user}}</div>
+            <ul>
+            {% for x in xx %}
+            <li>{{x.name}}_{{x.age}}</li> 字典
+             <li>{{x.lst.0}}</li> 列表
+            {% endfor %}
+            </ul>
+         </body>
+         </html>
+
+         ##条件语句
+         {% if age %}
+         <a>...</a>
+         {% else %}
+         <a>...</a>
+         {% endif %}

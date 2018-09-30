@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="i1">123</div>
+<script src="jquery.min.js"></script>
+<script>
+    //jQuery == $
+    var x =$('#i1');
+    var docObj = x[0];//获取jquery对象对应的dom对象
+    var d = document.getElementById('i1');
+    var xo = $(d); //dom对象转为jquery对象
+</script>
+</body>
+</html>

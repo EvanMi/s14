@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css</title>
+    <style>
+        /*id选择器*/
+        #i1{
+            background-color: #2459a2;
+            height: 48px;
+        }
+        /*类选择器*/
+        .c1{
+            background-color: red;
+            height: 100px;
+            margin-top: 10px;
+        }
+        .c2{
+            color: white;
+        }
+        /*标签选择器*/
+        /*div{*/
+             /*background-color: black;*/
+            /*height: 10px;*/
+            /*margin-top: 5px;*/
+        /*}*/
+        /*层级选择器*/
+        /*class c1下的div应用这个样式,所有的包含在里面的不管多少层*/
+        /*.c1 div{*/
+            /*background-color: black;*/
+            /*height: 25px;*/
+            /*margin-top: 15px;*/
+            /*color: aqua;*/
+        /*}*/
+        /*只控制class c1的直接包含的div，不是直接包含的不进行操作*/
+        .c1>div{
+            background-color: black;
+            height: 30px;
+            margin-top: 15px;
+            color: aqua;
+        }
+        /*
+        E + F 相邻兄弟选择器	选择匹配的F元素，且F元素是E元素后面紧邻的兄弟元素
+        E ~ F 选择匹配的F元素，且F元素是E元素后面的所有兄弟元素
+        */
+        /*组合选择器*/
+        #l1,#l2,#l3{
+            height: 30px;
+            width: 30px;
+            float: right;
+            background-color: #2459a2;
+            margin: 20px;
+        }
+        /*属性选择器*/
+        /*
+        E[attr] 选中具有attr属性的E元素
+        E[attr=val]选中具有attr属性，并且属性值为val的E元素
+        E[attr|=val]选中具有attr属性，并且属性值为val或以val-开头
+        E[attr~=val]选中具有attr属性，并且属性值包含val的E元素，该属性值必须以空格隔开
+        E[attr*=val]通配符选中具有attr属性，并且属性值包含val的E元素
+        E[attr^=val]起始符选中具有attr属性，并且属性值以val开始的E元素
+        E[attr$=val]结束符选中具有attr属性，并且属性值以val结束的E元素
+        */
+        input[type='text']{
+            height: 35px;
+            width: 100px;
+            background-color: #999999;
+        }
+    </style>
+</head>
+<body>
+<div style="background-color: #2459a2;height: 48px;">first</div>
+<div style="background-color: #2459a2;height: 48px;">second</div>
+<div style="background-color: #2459a2;height: 48px;">third</div>
+<div style="margin-top: 30px"></div>
+<div id="i1">i1</div>
+<div class="c1 c2">
+    <div>
+        <div style="background-color: #ededed">123</div>
+    </div>
+    <div></div>
+</div>
+<div class="c1">c1_2</div>
+
+<di id="l1"></di>
+<di id="l2"></di>
+<di id="l3"></di>
+<div>
+    <input type="text">
+    <input type="password">
+</div>
+<div>
+    <img src="python.png">
+</div>
+<div>
+    <div style="border: 1px dotted red;height: 75px;margin-top: 10px;border-radius: 50px;width: 300px;font-size: 22px;
+        text-align: center;line-height: 75px;
+        font-weight: bold;">123</div>
+</div>
+</body>
+</html>

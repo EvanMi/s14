@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //普通函数
+    function myf(af) {
+
+    }
+    //匿名函数
+    setInterval(function () {
+        console.log(123);
+    },5000);
+    //自执行函数
+    (function (arg) {
+        console.log(arg)
+    })(1)
+
+    //序列化
+    var lst = [1, 2, 3];
+    var s = JSON.stringify(lst);
+    //反序列化
+    var nLst = JSON.parse(s);
+    console.info(nLst);
+    //转义
+    var url = 'http://www.baidu.com';
+    //只编码后面的参数
+    var eUrl=encodeURI(url);
+    var dUrl=decodeURI(eUrl);
+    //对整个url进行编码
+    var eUrls=encodeURIComponent(url);
+    var dUrls=decodeURIComponent(eUrls);
+    //eval = python中eval和exec的合集
+    //时间,对象里面有很多的get和set方法
+    var d = new Date();
+    d.getSeconds()+5;
+    d.setSeconds(22);
+
+
+</script>
+</body>
+</html>

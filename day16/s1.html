@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .left{
+            float: left;
+        }
+        .right{
+            float: right;
+        }
+        .clean{
+            clear: both;
+        }
+        body{
+            margin: 0;
+        }
+        .pg-header{
+            height: 48px;
+            background-color: #2459a2;
+            color: white;
+            line-height: 48px;
+        }
+        .pg-content .menu{
+            position: fixed;
+            top: 48px;
+            left: 0;
+            bottom: 0;
+            width: 200px;
+            background-color: #dddddd;
+        }
+        .pg-content .content{
+            position: fixed;
+            top: 48px;
+            right: 0;
+            bottom: 0;
+            left: 200px;
+            overflow: auto;
+            min-width: 300px;
+            background-color: purple;
+            z-index: 9;
+        }
+        .pg-header .logo{
+            width: 200px;
+            background-color: darkcyan;
+            text-align: center;
+            height: 48px;
+        }
+        .pg-header .user{
+            width: 160px;
+            background-color: wheat;
+            height: 480px;
+            position: relative;
+        }
+        .pg-header .user:hover{
+            background-color: chartreuse;
+        }
+        .pg-header .user:hover .b{
+            display: block;
+        }
+        .pg-header .user a img {
+            height: 40px;
+            width: 40px;
+            margin-top: 4px;
+            border-radius: 50%;
+        }
+        .pg-header .user .b{
+            position: absolute;
+            top: 48px;
+            right: 44px;
+            z-index: 20;
+            background-color: red;
+            width: 160px;
+        }
+        .pg-header .user .b a{
+            display: block;
+        }
+        .hide{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="pg-header">
+        <div class="logo left">老男孩</div>
+        <div class="user right">
+           <a href="#">
+               <img src="python.png">
+           </a>
+            <div class="b hide">
+                <a>我的资料</a>
+                <a>注销</a>
+            </div>
+        </div>
+        <div class="clean"></div>
+    </div>
+    <div class="pg-content">
+        <div class="menu left">11</div>
+        <div class="content left">22</div>
+    </div>
+    <div class="pg-footer"></div>
+</body>
+</html>

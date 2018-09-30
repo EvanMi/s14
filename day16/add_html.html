@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" onclick="addEle2()" value="+">
+<div id="i1">
+    <p><input type="text" placeholder="hh"></p>
+</div>
+<script>
+    function addEle(){
+        var tag = '<input type="text">';
+        //第一个参数可以是 beforeEnd afterEnd beforeBegin afterBegin
+        document.getElementById('i1').insertAdjacentHTML("beforeEnd",tag);
+        //document.getElementById('i1').insertAdjacentText()  插入文本
+
+    }
+    function addEle2(){
+        var tag = document.createElement('input');
+        var p = document.createElement("p");
+        p.appendChild(tag);
+        tag.setAttribute("type","text");
+        tag.style.fontSize='16px';
+         document.getElementById('i1').appendChild(p);
+          //第一个参数可以是 beforeEnd afterEnd beforeBegin afterBegin
+          //document.getElementById('i1').insertAdjacentElement();
+    }
+</script>
+</body>
+</html>

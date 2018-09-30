@@ -1,0 +1,38 @@
+序列化
+关于Django中的序列化主要应用在将数据库中检索的数据返回给客户端用户，特别的Ajax请求一般返回的为Json格式。
+
+1、serializers
+
+from django.core import serializers
+
+ret = models.BookType.objects.all()
+
+data = serializers.serialize("json", ret)
+2、json.dumps
+
+import json
+
+#ret = models.BookType.objects.all().values('caption')
+ret = models.BookType.objects.all().values_list('caption')
+
+ret=list(ret)
+
+result = json.dumps(ret)
+由于json.dumps时无法处理datetime日期，所以可以通过自定义处理器来做扩展，如：
+import json
+from datetime import date
+from datetime import datetime
+
+class JsonCustomEncoder(json.JSONEncoder):
+
+    def default(self, field):
+
+        if isinstance(field, datetime):
+            return o.strftime('%Y-%m-%d %H:%M:%S')
+        elif isinstance(field, date):
+            return o.strftime('%Y-%m-%d')
+        else:
+            return json.JSONEncoder.default(self, field)
+
+
+# ds = json.dumps(d, cls=JsonCustomEncoder)

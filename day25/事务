@@ -1,0 +1,16 @@
+from django.db import transaction
+
+
+with transaction.atomic():
+   tags = form.cleaned_data.pop('tags')
+   content = form.cleaned_data.pop('content')
+   print(content)
+   content = XSSFilter().process(content)
+   form.cleaned_data['blog_id'] = request.session['user_info']['blog__nid']
+   obj = models.Article.objects.create(**form.cleaned_data)
+   models.ArticleDetail.objects.create(content=content, article=obj)
+   tag_list = []
+   for tag_id in tags:
+       tag_id = int(tag_id)
+       tag_list.append(models.Article2Tag(article_id=obj.nid, tag_id=tag_id))
+   models.Article2Tag.objects.bulk_create(tag_list)

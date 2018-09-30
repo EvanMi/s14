@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>modal</title>
+    <style>
+        .c1{
+            position: fixed;
+            left:0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background-color: black;
+            opacity: 0.6;
+            z-index: 9;
+        }
+        .c2{
+            width: 500px;
+            height: 400px;
+            background-color: white;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            margin-top: -200px;
+            margin-left: -250px;
+            z-index: 10;
+        }
+        .hide{
+            display: none;
+        }
+    </style>
+</head>
+<body style="margin: 0">
+
+<div>
+    <input type="button" value="添加" onclick="show()">
+    <input type="button" value="全选" onclick="chooseAll()">
+    <input type="button" value="取消" onclick="cancelAll()">
+    <input type="button" value="反选" onclick="reverseAll()">
+    <table>
+        <thead>
+        <tr>
+            <th>选择</th>
+            <th>主机名</th>
+            <th>端口</th>
+        </tr>
+        </thead>
+        <tbody id="tb">
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>1.1.1.2</td>
+            <td>90</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>1.1.1.3</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>1.1.1.4</td>
+            <td>190</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--遮罩层-->
+<div class="c1 hide" id="i1"></div>
+<!--弹出框-->
+<div class="c2 hide" id="i2">
+    <input type="text">
+    <input type="text">
+    <input type="button" value="提交">
+    <input type="button" value="取消" onclick="hide()">
+</div>
+<script>
+    //js必须加分号，因为现实的压缩后的js只有一行
+    function show() {
+        document.getElementById('i1').classList.remove('hide');
+        document.getElementById('i2').classList.remove('hide');
+    }
+    function hide(){
+        document.getElementById('i1').classList.add('hide');
+        document.getElementById('i2').classList.add('hide');
+    }
+    function chooseAll() {
+        var tbody = document.getElementById('tb');
+        var tr_list = tbody.children;
+        for (var i=0;i<tr_list.length;i++){
+            var tr = tr_list[i];
+            tr.firstElementChild.firstElementChild.checked = true;
+        }
+    }
+    function cancelAll() {
+        var tbody = document.getElementById('tb');
+        var tr_list = tbody.children;
+        for (var i=0;i<tr_list.length;i++){
+            var tr = tr_list[i];
+            tr.firstElementChild.firstElementChild.checked = false;
+        }
+    }
+    function reverseAll() {
+       var tbody = document.getElementById('tb');
+        var tr_list = tbody.children;
+        for (var i=0;i<tr_list.length;i++){
+            var tr = tr_list[i];
+            var eml = tr.firstElementChild.firstElementChild;
+            if(eml.checked){
+                eml.checked = false;
+            }else{
+               eml.checked = true;
+            }
+        }
+    }
+</script>
+</body>
+</html>

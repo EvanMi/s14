@@ -1,0 +1,38 @@
+query对象的一些方法：
+add_column( self, column, id=None )，对当前查询对象增加一列
+add_entity( self, entity, alias=None, id=None )，对当前查询对象增加一个实体
+all( self )，去数据库执行查询操作，然会resultProxy类型
+autoflush( self, setting )，自动刷数据库
+apply_avg( self, col )，增加SQL AVG，返回query对象
+apply_max( self, col )，增加SQL MAX，返回query对象
+apply_min( self, col )，增加SQL MIN，返回query对象
+apply_sum( self, col )，增加SQL SUM，返回query对象
+avg( self, col )，增加SQL avg，去数据库查询
+count( self )，去数据库查询，并返回计数
+distinct( self )，对整个query对象增加去重复，返回query
+filter( self, criterion )，增加过滤对象，返回query
+filter_by( self, **kwargs )，增加过滤字典，返回query
+first( self )，去数据库返回查询结果的一条
+from_statement( self, statement )，传入使用select()函数生成的查询语句，返回query
+get( self, ident, reload=False, lockmode=None )，检查当前session是否具有此对象，如果有则
+group_by( self, criterion )，分组，返回query
+having( self, criterion )，增加having条件，返回query
+join( self, prop, id=None, aliased=False, from_joinpoint=False )，新增加一个表，进行from查询，返回query
+limit( self, limit )，limit限制，返回query
+load( self, ident, raiseerr=True, lockmode=None )，从数据库返回这个实例
+max( self, col )，执行SQL MAX
+min( self, col, )，执行SQL MIN
+offset( self, offset )，偏移量，返回query
+one( self )，执行sql，返回结果，如果结果不是一个则抛出异常
+options( self, *args )，根据数据中的mapper，返回一个新的query
+order_by( self, criterion )，排序，返回query，
+outerjoin( self, prop, id=None, aliased=False, from_joinpoint=False )，外联操作，返回query
+params( self, *args, **kwargs )，更改现有的query中的查询绑定的值，返回query
+populate_existing( self )，返回一个query，刷新所有对象
+query_from_parent( cls, instance, property, **kwargs ) (classmethod)，从另外一个query继承
+reset_joinpoint( self )，重置连接属性，会影响filter_by，join，outerjoin
+sum( self, col )，执行sum
+with_lockmode( self, mode )，返回query，设置lockmodle
+with_parent( self, instance, property=None )，从父query继承
+__getitem__( self, item ) (indexing)
+__iter__( self ) (iteration)

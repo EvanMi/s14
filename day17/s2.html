@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="全选" onclick="checkall()">
+<input type="button" value="反选" onclick="reverse()">
+<input type="button" value="取消" onclick=" cancenl()">
+<table border="1">
+    <thead>
+    <tr>
+        <td>选项</td>
+        <td>IP</td>
+        <td>端口</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><input type="checkbox"></td>
+        <td>192.168.1.1</td>
+        <td>66</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"></td>
+        <td>192.168.2.2</td>
+        <td>12</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"></td>
+        <td>172.16.3.22</td>
+        <td>32</td>
+    </tr>
+    </tbody>
+</table>
+<script src="jquery.min.js"></script>
+<script>
+    function checkall() {
+        $('td>input:checkbox').prop('checked',true);
+    }
+    function cancenl() {
+        $('td>input:checkbox').prop('checked',false);
+    }
+    function reverse(){
+        $('td>:checkbox').each(function (k) {
+            //k是下标
+            // if(this.checked){//dom方式实现；this是当前循环的dom对象
+            //     this.checked=false;
+            // }else{
+            //     this.checked=true;
+            // }
+
+            // if($(this).prop('checked')){//jquery普通实现
+            //     $(this).prop('checked',false);
+            // }else{
+            //     $(this).prop('checked',true)
+            // }
+
+             // 三元运算  var v = 条件?真值:假值
+
+            var v = $(this).prop('checked')?false:true;
+            $(this).prop('checked',v);
+        });
+    }
+</script>
+</body>
+</html>

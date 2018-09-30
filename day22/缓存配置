@@ -1,0 +1,241 @@
+1.开发调试
+# 此为开始调试用，实际内部不做任何操作
+    # 配置：
+        CACHES = {
+            'default': {
+                'BACKEND': 'django.core.cache.backends.dummy.DummyCache',     # 引擎
+                'TIMEOUT': 300,                                               # 缓存超时时间（默认300，None表示永不过期，0表示立即过期）
+                'OPTIONS':{
+                    'MAX_ENTRIES': 300,                                       # 最大缓存个数（默认300）
+                    'CULL_FREQUENCY': 3,                                      # 缓存到达最大个数之后，剔除缓存个数的比例，即：1/CULL_FREQUENCY（默认3）
+                },
+                'KEY_PREFIX': '',                                             # 缓存key的前缀（默认空）
+                'VERSION': 1,                                                 # 缓存key的版本（默认1）
+                'KEY_FUNCTION' 函数名                                          # 生成key的函数（默认函数会生成为：【前缀:版本:key】）
+            }
+        }
+
+
+    # 自定义key
+    def default_key_func(key, key_prefix, version):
+        """
+        Default function to generate keys.
+
+        Constructs the key used by all other methods. By default it prepends
+        the `key_prefix'. KEY_FUNCTION can be used to specify an alternate
+        function with custom key making behavior.
+        """
+        return '%s:%s:%s' % (key_prefix, version, key)
+
+    def get_key_func(key_func):
+        """
+        Function to decide which key function to use.
+
+        Defaults to ``default_key_func``.
+        """
+        if key_func is not None:
+            if callable(key_func):
+                return key_func
+            else:
+                return import_string(key_func)
+        return default_key_func
+
+
+
+2.内存
+    # 此缓存将内容保存至内存的变量中
+    # 配置：
+        CACHES = {
+            'default': {
+                'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+                'LOCATION': 'unique-snowflake',
+            }
+        }
+
+    # 注：其他配置同开发调试版本
+
+3.文件
+    # 此缓存将内容保存至文件
+    # 配置：
+
+        CACHES = {
+            'default': {
+                'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+                'LOCATION': '/var/tmp/django_cache',
+            }
+        }
+    # 注：其他配置同开发调试版本
+
+4.数据库
+    # 此缓存将内容保存至数据库
+
+    # 配置：
+        CACHES = {
+            'default': {
+                'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+                'LOCATION': 'my_cache_table', # 数据库表
+            }
+        }
+
+    # 注：执行创建表命令 python manage.py createcachetable
+
+
+5.Memcache缓存（python-memcached模块）
+# 此缓存使用python-memcached模块连接memcache
+
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+            'LOCATION': '127.0.0.1:11211',
+        }
+    }
+
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+            'LOCATION': 'unix:/tmp/memcached.sock',
+        }
+    }
+
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+            'LOCATION': [
+                '172.19.26.240:11211',
+                '172.19.26.242:11211',
+            ]
+        }
+    }
+
+
+6.Memcache缓存（pylibmc模块）
+# 此缓存使用pylibmc模块连接memcache
+
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+            'LOCATION': '127.0.0.1:11211',
+        }
+    }
+
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+            'LOCATION': '/tmp/memcached.sock',
+        }
+    }
+
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+            'LOCATION': [
+                '172.19.26.240:11211',
+                '172.19.26.242:11211',
+            ]
+        }
+    }
+
+
+7.Redis缓存
+
+（依赖：pip3 install django-redis）
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "CONNECTION_POOL_KWARGS": {"max_connections": 100}
+            # "PASSWORD": "密码",
+        }
+    }
+}
+
+#配置redis  new
+ --------------pip install django-redis-cache #这个没用可能
+CACHES = {
+    'default': {
+        'BACKEND': 'redis_cache.RedisCache',
+        'LOCATION': '127.0.0.1:6379',
+        'OPTIONS': {
+            'DB': 0,
+            'PASSWORD': 'afc7c7180c3c43b51b1ebfebae76b5e8',
+            'PARSER_CLASS': 'redis.connection.HiredisParser',
+           # 'PICKLE_VERSION': 2,
+            #'CONNECTION_POOL_CLASS': 'redis.ConnectionPool',
+            'SOCKET_TIMEOUT': 10,
+            #'CONNECTION_POOL_CLASS_KWARGS': {
+             #   'max_connections': 2,
+           # }
+        },
+    },
+}
+
+自己操作redis
+from django_redis import get_redis_connection
+conn = get_redis_connection("default")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+应用
+1.全站应用
+
+   使用中间件，经过一系列的认证等操作，如果内容在缓存中存在，则使用FetchFromCacheMiddleware获取内容并返回给用户，当返回给用户之前，判断缓存中是否已经存在，如果不存在则UpdateCacheMiddleware会将缓存保存至缓存，从而实现全站缓存
+
+    MIDDLEWARE = [
+        'django.middleware.cache.UpdateCacheMiddleware',
+        # 其他中间件...
+        'django.middleware.cache.FetchFromCacheMiddleware',
+    ]
+
+    CACHE_MIDDLEWARE_ALIAS = ""
+    CACHE_MIDDLEWARE_SECONDS = ""
+    CACHE_MIDDLEWARE_KEY_PREFIX = ""
+
+
+2.单独视图缓存
+    方式一：
+        from django.views.decorators.cache import cache_page
+
+        @cache_page(60 * 15)
+        def my_view(request):
+            ...
+
+    方式二：
+        from django.views.decorators.cache import cache_page
+
+        urlpatterns = [
+            url(r'^foo/([0-9]{1,2})/$', cache_page(60 * 15)(my_view)),
+        ]
+
+
+
+3.局部视图使用
+    a. 引入TemplateTag
+
+        {% load cache %}
+
+    b. 使用缓存
+
+        {% cache 5000 缓存key %}
+            缓存内容
+        {% endcache %}

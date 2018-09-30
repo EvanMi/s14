@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a id="aa" href="https://www.baidu.com">go!go!go!go!go!1</a>
+<a id="ab" href="https://www.baidu.com">go!go!go!go!go!2</a>
+</body>
+<script src="jquery.min.js"></script>
+<script>
+    document.getElementById('aa').onclick = function (ev) {
+        alert(123);
+        return false;//return false以后就不再跳转了，我们的事件优先
+    }
+    $('#ab').click(function () {//jQuery版本
+        alert(456);
+        return false;
+    });
+</script>
+</html>
